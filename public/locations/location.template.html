@@ -1,0 +1,24 @@
+<h1>{{location.name | uppercase}} - {{location.id}}</h1>
+
+<img ng-src="/images/{{location.floorplan}}.png" ng-click="showModal($event)" alt="">
+
+<md-card ng-repeat="comment in comments">
+    <img ng-if="comment.image" ng-src="{{comment.image}}" alt="">
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">{{comment.id}}</span>
+            <span class="md-subhead">{{comment.create_at}}</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <p>
+            {{comment.text}}
+        </p>
+    </md-card-content>
+    <md-card-actions layout='row' layout-align='end center'>
+        <md-button class="md-icon-button">
+            <md-icon>delete</md-icon>
+        </md-button>
+
+    </md-card-actions>
+</md-card>

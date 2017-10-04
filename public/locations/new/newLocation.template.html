@@ -1,0 +1,33 @@
+<div layout="column" ng-cloak class="md-inline-form">
+    <md-content layout="column">
+        <md-input-container>
+            <label for="newLocation.name">newLocation Name:</label>
+            <input placeholder="test" type="text" name="newLocation.name" ng-model="newLocation.name">
+        </md-input-container>
+        <md-input-container>
+            <label for="newLocation.id">newLocation Id:</label>
+            <input placeholder="test" type="text" name="newLocation.id" ng-model="newLocation.id">
+        </md-input-container>
+        <md-input-container>
+            <label for="newLocation.latitude">newLocation latitude:</label>
+            <input placeholder="1" type="text" name="newLocation.latitude" ng-model="newLocation.latitude">
+        </md-input-container>
+        <md-input-container>
+            <label for="newLocation.longitude">newLocation longitude:</label>
+            <input placeholder="1" type="text" name="newLocation.longitude" ng-model="newLocation.longitude">
+        </md-input-container>
+        <md-input-container>
+            <label for="newLocation.floorplan">newLocation floorplan:</label>
+            <input placeholder="test" type="text" name="newLocation.floorplan" ng-model="newLocation.floorplan">
+        </md-input-container>
+        <md-input-container>
+            <label for="newLocation.district">newLocation district:</label>
+            <input placeholder="test" type="text" name="newLocation.district" ng-model="newLocation.district">
+        </md-input-container>
+
+        <md-switch ng-model="newLocation.active">
+            newLocation active? {{newLocation.active}}
+        </md-switch>
+        <md-button ng-click="addLocation()">Submit</md-button>
+    </md-content>
+</div>

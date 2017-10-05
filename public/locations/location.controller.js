@@ -7,9 +7,12 @@ angular
 
     $scope.showModal = function ($event) {
       const newComment = {};
+      const imgHeight = $event.srcElement.clientHeight;
+      const imgWidth = $event.srcElement.clientWidth;
       // This might not work in all browsers....but neither will flexbox sooooo
-      newComment.x = $event.layerX;
-      newComment.y = $event.layerY;
+      console.log($event.srcElement.clientHeight);
+      newComment.x = $event.layerX / imgWidth * 100;
+      newComment.y = $event.layerY / imgHeight * 100;
       $scope.comments.push(newComment);
       console.log($event);
     };

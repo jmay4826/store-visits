@@ -12,7 +12,7 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-massive(process.env.CONNECTION_STRING).then(dbInstance => app.set('db', dbInstance));
+massive(process.env.DATABASE_URL).then(dbInstance => app.set('db', dbInstance));
 
 app.get('/api/location/:id', controller.getLocation);
 app.get('/api/locations', controller.getLocations);

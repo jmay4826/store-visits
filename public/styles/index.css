@@ -5,14 +5,34 @@
   display: inline-block;
   background-color: rgb(255, 255, 255);
 }
-
-.marker {
-  width: 15px;
-  height: 15px;
-  background-color: blue;
-  z-index: 10;
+img:focus {
+  outline: none;
 }
 
+.marker {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background-color: rgba(187, 187, 248, 0.9);
+  z-index: 10;
+  border-radius: 50%;
+  transform: translate(-13px, -13px);
+  text-align: center;
+}
+
+.number {
+  vertical-align: middle;
+}
 #markerHolder {
   position: relative;
+}
+
+.ng-leave {
+  transform: translateX(0px);
+  opacity: 100;
+  transition: all 200ms;
+}
+.ng-leave-active {
+  transform: translateX(-200px);
+  opacity: 0;
 }

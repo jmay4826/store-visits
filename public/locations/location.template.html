@@ -3,7 +3,9 @@
     <div class="simple-card" id="markerHolder">
         <img style="max-height: 80vh; max-width: 100vh" ng-src="{{s3path + location.floorplan}}" ng-click="showModal($event)" alt="">
 
-        <div class="marker" ng-repeat="comment in comments" style="position: absolute; left: {{comment.x}}px; top: {{comment.y}}px"></div>
+        <div class="marker" ng-repeat="comment in comments track by $index" style="position: absolute; left: {{comment.x}}%; top: {{comment.y}}%">
+            <span class="number">{{$index + 1}}</span>
+        </div>
 
     </div>
     <md-card ng-repeat="comment in comments">
@@ -20,7 +22,7 @@
             </p>
         </md-card-content>
         <md-card-actions layout='row' layout-align='end center'>
-            <md-button class="md-icon-button">
+            <md-button class="md-icon-button" ng-click="comments.splice($index, 1)">
                 <md-icon>delete</md-icon>
             </md-button>
 

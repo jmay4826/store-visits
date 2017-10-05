@@ -12,17 +12,17 @@ CREATE TABLE users
 name text,
 type text);
 
--- CREATE TABLE location_permissions 
--- (id serial primary key,
--- user integer,
--- location integer,
--- FOREIGN KEY (user) REFERENCES users(id),
--- FOREIGN KEY (location) REFERENCES locations(id)
--- );
+CREATE TABLE location_permissions 
+(id serial primary key,
+userid integer,
+location integer,
+FOREIGN KEY (userid) REFERENCES users(id),
+FOREIGN KEY (location) REFERENCES locations(id)
+);
 
 CREATE TABLE comments
 (id serial primary key,
-text text,
+content text,
 updated_at timestamp,
 created_at timestamp,
 author integer,

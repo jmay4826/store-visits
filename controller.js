@@ -55,6 +55,21 @@ module.exports = {
       res.end();
     });
   },
+  addComment(req, res) {
+    const db = req.app.get('db');
+    const { newComment } = req.body;
+    console.log(newComment);
+    db
+      .addComment([
+        newComment.content,
+        newComment.author,
+        newComment.location,
+        newComment.x,
+        newComment.y,
+        newComment.imagePath,
+      ])
+      .then(response => res.json(response));
+  },
   firstrun(req, res) {
     const db = req.app.get('db');
     db.createTables().then(response => res.redirect('/'));

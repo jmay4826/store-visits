@@ -1,0 +1,44 @@
+<md-dialog aria-label="Add Comment">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Add Comment</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!-- <h2>Using .md-dialog-content class that sets the padding as the spec</h2> -->
+                <form name='newCommentForm' id='newCommentForm'>
+                    <div layout="column" layout-padding>
+                        <div layout="column" layout-align="space between center">
+                            <!-- maybe one day allow multiple images? -->
+                            <img ngf-src="image || '../../images/thumbnail.svg'" ngf-no-object-url="true" style="max-height: 200px; max-width: 200px">
+                            <md-button ngf-select ngf-change="sign($file)" ng-model="image" name="image" ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                                ngf-max-size="10MB" ngf-min-height="100">Add an Image</md-button>
+                        </div>
+                        <md-input-container>
+                            <label for="content">Enter Comment</label>
+                            <textarea name="content" ng-model="content"></textarea>
+                        </md-input-container>
+
+                        <md-chips ng-model="tags" placeholder="Add tags (optional)"></md-chips>
+                    </div>
+                </form>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button ng-click="addComment()">
+                Submit
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

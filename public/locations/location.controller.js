@@ -1,19 +1,55 @@
 angular
   .module('floorplan')
-  .controller('locationController', function ($scope, commentService, comments, location) {
-    $scope.s3path = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
+  .controller('locationController', function (
+    $scope,
+    commentService,
+    comments,
+    location,
+    $mdDialog,
+  ) {
+    $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     $scope.comments = comments;
     [$scope.location] = location;
 
-    $scope.showModal = function ($event) {
-      const newComment = {};
-      const imgHeight = $event.srcElement.clientHeight;
-      const imgWidth = $event.srcElement.clientWidth;
-      // This might not work in all browsers....but neither will flexbox sooooo
-      console.log($event.srcElement.clientHeight);
-      newComment.x = $event.layerX / imgWidth * 100;
-      newComment.y = $event.layerY / imgHeight * 100;
+    const addComment = (comment, coordinates) => {
+      console.log(location);
+      const newComment = {
+        image: comment.image,
+        content: comment.content,
+        tags: comment.tags,
+        x: coordinates.x,
+        y: coordinates.y,
+        author: 2,
+        location: $scope.location.id,
+      };
+      commentService.addComment(newComment);
       $scope.comments.push(newComment);
-      console.log($event);
+      console.log(comment, coordinates);
+    };
+
+    $scope.showModal = function (event) {
+      const imgHeight = event.srcElement.clientHeight;
+      const imgWidth = event.srcElement.clientWidth;
+      const coordinates = {
+        x: event.layerX / imgWidth * 100,
+        y: event.layerY / imgHeight * 100,
+      };
+
+      $mdDialog
+        .show({
+          templateUrl: './comments/comment.modal.template.html',
+          controller: 'commentModalController',
+          parent: angular.element(document.body),
+          targetEvent: event,
+          clickOutsideToClose: true,
+          fullscreen: true,
+        })
+        .then(response => addComment(response, coordinates));
+
+      // This might not work in all browsers....but neither will flexbox sooooo
+      // Confirmed it acts funny on iOS if you scroll past the initial view
+      console.log(event.srcElement.clientHeight);
+      // $scope.comments.push(newComment);
+      console.log(event);
     };
   });

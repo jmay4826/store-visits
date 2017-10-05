@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.static('public'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '15mb' }));
 
 massive(process.env.DATABASE_URL).then(dbInstance => app.set('db', dbInstance));
 
@@ -18,6 +18,7 @@ app.get('/firstrun', controller.firstrun);
 app.get('/api/location/:id', controller.getLocation);
 app.get('/api/locations', controller.getLocations);
 app.get('/api/location/:id/comments', controller.getComments);
+app.post('/api/location/:id/comments/new', controller.addComment);
 app.post('/api/locations/new', controller.addLocation);
 app.get('/sign-s3', controller.signS3);
 

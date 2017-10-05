@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 massive(process.env.DATABASE_URL).then(dbInstance => app.set('db', dbInstance));
 
+app.get('/firstrun', controller.firstrun);
 app.get('/api/location/:id', controller.getLocation);
 app.get('/api/locations', controller.getLocations);
 app.get('/api/location/:id/comments', controller.getComments);

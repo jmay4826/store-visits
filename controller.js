@@ -55,4 +55,8 @@ module.exports = {
       res.end();
     });
   },
+  firstrun(req, res) {
+    const db = req.app.get('db');
+    db.createTables().then(response => res.redirect('/'));
+  },
 };

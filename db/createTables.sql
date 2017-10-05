@@ -14,7 +14,7 @@ type text);
 
 CREATE TABLE location_permissions 
 (id serial primary key,
-userid integer REFERENCES users(id)
+userid integer REFERENCES users(id),
 location integer REFERENCES locations(id)
 );
 

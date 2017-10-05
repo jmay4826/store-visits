@@ -14,10 +14,8 @@ type text);
 
 CREATE TABLE location_permissions 
 (id serial primary key,
-userid integer,
-location integer,
-FOREIGN KEY (userid) REFERENCES users(id),
-FOREIGN KEY (location) REFERENCES locations(id)
+userid integer REFERENCES users(id)
+location integer REFERENCES locations(id)
 );
 
 CREATE TABLE comments
@@ -25,12 +23,10 @@ CREATE TABLE comments
 content text,
 updated_at timestamp,
 created_at timestamp,
-author integer,
-location text,
+author integer REFERENCES users(id),
+location text REFERENCES locations(id),
 x integer,
 y integer,
-image text,
-FOREIGN KEY (author) REFERENCES users(id)
-FOREIGN KEY (location) REFERENCES locations(id)
+image text
 );
 

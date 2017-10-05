@@ -1,5 +1,5 @@
 angular
-  .module('floorplan', ['ui.router', 'ngMaterial', 'ngAnimate'])
+  .module('floorplan', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngFileUpload'])
   .config(function ($stateProvider, $urlRouterProvider) {
     //* **TEMPORARY***CHANGE OTHERWISE TO /
     $urlRouterProvider.otherwise('/locations');

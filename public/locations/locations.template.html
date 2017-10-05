@@ -1,10 +1,10 @@
-<h1>{{test}}</h1>
+<h1>Choose a location</h1>
 <h2>{{serviceTest}}</h2>
 
 <md-card>
     <ul>
         <li ng-repeat="location in locations">
-            <md-button ui-sref="locations({id: location.id})">{{location.name}} - {{location.id}}</md-button>
+            <md-button ui-sref="location({id: location.id})">{{location.name}} - {{location.id}}</md-button>
         </li>
     </ul>
 </md-card>

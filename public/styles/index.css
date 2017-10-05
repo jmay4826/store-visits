@@ -1,1 +1,18 @@
+.simple-card {
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  display: inline-block;
+  background-color: rgb(255, 255, 255);
+}
 
+.marker {
+  width: 15px;
+  height: 15px;
+  background-color: blue;
+  z-index: 10;
+}
+
+#markerHolder {
+  position: relative;
+}

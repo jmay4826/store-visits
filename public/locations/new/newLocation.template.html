@@ -1,33 +1,61 @@
-<div layout="column" ng-cloak class="md-inline-form">
-    <md-content layout="column">
-        <md-input-container>
-            <label for="newLocation.name">newLocation Name:</label>
-            <input placeholder="test" type="text" name="newLocation.name" ng-model="newLocation.name">
-        </md-input-container>
-        <md-input-container>
-            <label for="newLocation.id">newLocation Id:</label>
-            <input placeholder="test" type="text" name="newLocation.id" ng-model="newLocation.id">
-        </md-input-container>
-        <md-input-container>
-            <label for="newLocation.latitude">newLocation latitude:</label>
-            <input placeholder="1" type="text" name="newLocation.latitude" ng-model="newLocation.latitude">
-        </md-input-container>
-        <md-input-container>
-            <label for="newLocation.longitude">newLocation longitude:</label>
-            <input placeholder="1" type="text" name="newLocation.longitude" ng-model="newLocation.longitude">
-        </md-input-container>
-        <md-input-container>
-            <label for="newLocation.floorplan">newLocation floorplan:</label>
-            <input placeholder="test" type="text" name="newLocation.floorplan" ng-model="newLocation.floorplan">
-        </md-input-container>
-        <md-input-container>
-            <label for="newLocation.district">newLocation district:</label>
-            <input placeholder="test" type="text" name="newLocation.district" ng-model="newLocation.district">
-        </md-input-container>
+<div layout="row" layout-align="center" layout-padding>
+    <div flex="90">
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline"><md-icon>add</md-icon> Add New Location</span>
+                </md-card-title-text>
+            </md-card-title>
+            <form name='newLocationForm' id='newLocationForm'>
+                <md-card-content layout="column" layout-align="center center">
 
-        <md-switch ng-model="newLocation.active">
-            newLocation active? {{newLocation.active}}
-        </md-switch>
-        <md-button ng-click="addLocation()">Submit</md-button>
-    </md-content>
+                    <div layout="column" layout-padding>
+                        <div layout="column" flex="20" layout-align="space between center">
+                            <img ngf-src="floorplan || '../../images/thumbnail.svg'" ngf-no-object-url="true" style="max-height: 200px; max-width: 200px">
+                            <md-button ngf-select ngf-change="sign($file)" ng-model="floorplan" name="floorplan" ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                                ngf-max-size="10MB" ngf-min-height="100">Choose Floorplan</md-button>
+                        </div>
+                        <div layout="row" flex="80" layout-wrap>
+                            <md-input-container flex="100">
+                                <label for="name">Location Name</label>
+                                <input type="text" name="name" ng-model="name">
+                            </md-input-container>
+                            <md-input-container flex="50">
+                                <label for="id">Location Code</label>
+                                <input type="text" name="id" ng-model="id">
+                            </md-input-container>
+                            <md-input-container flex="50">
+                                <label for="district">District</label>
+                                <md-select name="district" ng-model="district">
+                                    <md-option value="district">district</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <div flex="100" layout="row" layout-align="space-between">
+                                <div flex="50">
+                                    <md-input-container>
+                                        <label for="latitude">Latitude</label>
+                                        <input type="number" value='100' name="latitude" ng-model="latitude">
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label for="longitude">Longitude</label>
+                                        <input type="number" value='100' name="longitude" ng-model="longitude">
+                                    </md-input-container>
+                                </div>
+                                <div flex="50">
+                                    <md-switch ng-model="active" ng-init="active=true">
+                                        Active
+                                        <md-icon style="font-size: 14px">info</md-icon>
+                                    </md-switch>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <md-button ng-click="addLocation()">Submit</md-button>
+
+                </md-card-content>
+            </form>
+
+        </md-card>
+    </div>
 </div>
+<img src="https://s3.us-east-2.amazonaws.com/floorplans-uploads/thisisanewname.png" alt="">

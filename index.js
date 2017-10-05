@@ -1,6 +1,6 @@
 const express = require('express');
 const controller = require('./controller');
-const config = require('./config');
+// const config = require('./config');
 const dotenv = require('dotenv');
 const massive = require('massive');
 const aws = require('aws-sdk');
@@ -20,4 +20,4 @@ app.get('/api/location/:id/comments', controller.getComments);
 app.post('/api/locations/new', controller.addLocation);
 app.get('/sign-s3', controller.signS3);
 
-app.listen(config.PORT, () => console.log(`Listening on ${config.PORT}`));
+app.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));

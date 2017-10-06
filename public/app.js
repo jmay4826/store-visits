@@ -37,6 +37,11 @@ angular
           error: null
         }
       })
+      .state('register', {
+        url: '/register',
+        templateUrl: './register/register.template.html',
+        controller: 'registerController'
+      })
       .state('newLocation', {
         url: '/locations/new',
         templateUrl: './locations/new/newLocation.template.html',

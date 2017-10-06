@@ -4,6 +4,7 @@ angular.module('floorplan').service('authService', function ($http, $q) {
     $http.post('/auth/login', { username, password }).then((response) => {
       currentUser = response.data.passport.user;
     });
+  this.register = (username, password) => $http.post('/auth/register', { username, password });
 
   this.getCurrentUser = function () {
     const defer = $q.defer();

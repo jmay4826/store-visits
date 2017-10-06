@@ -22,8 +22,8 @@ angular
         author: 2,
         location: $scope.location.id,
       };
-      commentService.addComment(newComment);
-      $scope.comments.push(newComment);
+      return commentService.addComment(newComment);
+      // $scope.comments.push(newComment);
       console.log(comment, coordinates);
     };
 
@@ -44,7 +44,10 @@ angular
           clickOutsideToClose: true,
           fullscreen: true,
         })
-        .then(response => addComment(response, coordinates));
+        .then(response => addComment(response, coordinates))
+        .then((response) => {
+          $scope.comments.push(response.data[0]);
+        });
 
       // This might not work in all browsers....but neither will flexbox sooooo
       // Confirmed it acts funny on iOS if you scroll past the initial view

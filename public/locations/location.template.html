@@ -10,25 +10,28 @@
         </div>
 
     </div>
-    <md-card ng-repeat="comment in comments track by $index">
-        <img ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image" alt="Washed Out">
-        <!-- <img ng-if="comment.image" ng-src="{{comment.image}}" alt=""> -->
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">{{$index + 1}}</span>
-                <span class="md-subhead">{{comment.created_at | date : 'medium'}}</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            <p>
-                {{comment.content}}
-            </p>
-        </md-card-content>
-        <md-card-actions layout='row' layout-align='end center'>
-            <md-button class="md-icon-button" ng-click="comments.splice($index, 1)">
-                <md-icon>delete</md-icon>
-            </md-button>
+    <div layout="row" layout-wrap layout-align="center center">
+        <md-card ng-repeat="comment in comments track by $index" flex="75">
+            <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
+                alt="{{comment.id}}">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{$index + 1}}</span>
+                    <span class="md-subhead">{{comment.created_at | date : 'medium'}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <p>
+                    {{comment.content}}
+                </p>
+            </md-card-content>
+            <md-card-actions layout='row' layout-align='end center'>
+                <md-button class="md-icon-button" ng-click="comments.splice($index, 1)">
+                    <md-icon>delete</md-icon>
+                </md-button>
 
-        </md-card-actions>
-    </md-card>
+            </md-card-actions>
+        </md-card>
+
+    </div>
 </div>

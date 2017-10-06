@@ -4,12 +4,18 @@ angular.module('floorplan').service('commentService', function ($http, uploadSer
   this.addComment = (newComment) => {
     // eslint did this... instead of a ternary
     // newComment.image = !!newComment.image;
-    newComment.imagePath = newComment.image.type.substr(-3);
+    newComment.imagePath = newComment.image ? newComment.image.type.substr(-3) : null;
 
-    $http
+    return $http
       .post(`/api/location/${newComment.location}/comments/new`, { newComment })
       .then((response) => {
-        uploadService.upload(uploadService.uploadCommentImage(newComment, response.data[0].id));
+        console.log(response);
+        if (newComment.image) {
+          return uploadService
+            .upload(uploadService.uploadCommentImage(newComment, response.data[0].id))
+            .then(uploadResponse => response);
+        }
+        return response;
       });
   };
 });

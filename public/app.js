@@ -32,10 +32,7 @@ angular
         controller: 'locationController',
         resolve: {
           comments(commentService, $stateParams) {
-            return commentService.getComments($stateParams.id).then((response) => {
-              console.log(response);
-              return response.data;
-            });
+            return commentService.getComments($stateParams.id).then(response => response.data);
           },
           location(locationService, $stateParams) {
             return locationService.getLocation($stateParams.id).then(response => response.data);

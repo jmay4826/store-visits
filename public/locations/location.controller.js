@@ -12,7 +12,6 @@ angular
     [$scope.location] = location;
 
     const addComment = (comment, coordinates) => {
-      console.log(location);
       const newComment = {
         image: comment.image,
         content: comment.content,
@@ -23,10 +22,13 @@ angular
         location: $scope.location.id,
       };
       return commentService.addComment(newComment);
-      // $scope.comments.push(newComment);
-      console.log(comment, coordinates);
     };
 
+    $scope.deleteComment = function (id, index) {
+      commentService.deleteComment(id).then((response) => {
+        $scope.comments.splice(index, 1);
+      });
+    };
     $scope.showModal = function (event) {
       const imgHeight = event.srcElement.clientHeight;
       const imgWidth = event.srcElement.clientWidth;
@@ -51,8 +53,8 @@ angular
 
       // This might not work in all browsers....but neither will flexbox sooooo
       // Confirmed it acts funny on iOS if you scroll past the initial view
-      console.log(event.srcElement.clientHeight);
+      // console.log(event.srcElement.clientHeight);
       // $scope.comments.push(newComment);
-      console.log(event);
+      // console.log(event);
     };
   });

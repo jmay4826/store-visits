@@ -21,5 +21,6 @@ app.get('/api/location/:id/comments', controller.getComments);
 app.post('/api/location/:id/comments/new', controller.addComment);
 app.post('/api/locations/new', controller.addLocation);
 app.get('/sign-s3', controller.signS3);
+app.delete('/api/comment/:id', controller.deleteComment);
 
 app.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));

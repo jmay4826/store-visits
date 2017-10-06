@@ -70,6 +70,10 @@ module.exports = {
       ])
       .then(response => res.json(response));
   },
+  deleteComment(req, res) {
+    const db = req.app.get('db');
+    db.deleteComment([req.params.id]).then(response => res.json(response));
+  },
   firstrun(req, res) {
     const db = req.app.get('db');
     db.createTables().then(response => res.redirect('/'));

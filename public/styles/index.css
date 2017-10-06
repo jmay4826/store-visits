@@ -33,6 +33,6 @@ img:focus {
   transition: all 200ms;
 }
 .ng-leave-active {
-  transform: translateX(-200px);
+  transform: scaleY(0.1);
   opacity: 0;
 }

@@ -28,11 +28,19 @@ img:focus {
 }
 
 .ng-leave {
-  transform: translateX(0px);
+  /* transform: translateX(0px); */
   opacity: 100;
-  transition: all 200ms;
+  transition: all 250ms;
 }
 .ng-leave-active {
-  transform: scaleY(0.1);
+  /* transform: scaleY(0.1); */
   opacity: 0;
+}
+
+.ng-enter {
+  opacity: 0;
+  transition: all 250ms;
+}
+.ng-enter-active {
+  opacity: 100;
 }

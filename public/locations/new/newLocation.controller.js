@@ -1,6 +1,12 @@
 angular
   .module('floorplan')
-  .controller('newLocationController', function ($scope, users, locationService, uploadService) {
+  .controller('newLocationController', function (
+    $scope,
+    $state,
+    users,
+    locationService,
+    uploadService
+  ) {
     $scope.users = users;
 
     let floorplanUrl = '';
@@ -20,8 +26,11 @@ angular
             longitude: $scope.longitude,
             floorplan: floorplanUrl,
             district: $scope.district,
-            active: $scope.active
+            active: $scope.active,
+            allowedUsers: $scope.allowedUsers
           });
-        });
+          return response;
+        })
+        .then(() => $state.go('locations'));
     };
   });

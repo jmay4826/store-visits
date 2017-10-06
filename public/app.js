@@ -19,7 +19,7 @@ function authorized(authService, $q, $state) {
 }
 
 angular
-  .module('floorplan', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngFileUpload'])
+  .module('floorplan', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngFileUpload', 'duScroll'])
   .config(function ($stateProvider, $urlRouterProvider) {
     //* **TEMPORARY***CHANGE OTHERWISE TO /
     $urlRouterProvider.otherwise('/locations');

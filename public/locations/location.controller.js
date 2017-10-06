@@ -6,10 +6,12 @@ angular
     comments,
     location,
     $mdDialog,
+    authorized
   ) {
     $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     $scope.comments = comments;
     [$scope.location] = location;
+    $scope.user = authorized.username;
 
     const addComment = (comment, coordinates) => {
       const newComment = {
@@ -18,8 +20,8 @@ angular
         tags: comment.tags,
         x: coordinates.x,
         y: coordinates.y,
-        author: 2,
-        location: $scope.location.id,
+        author: $scope.user,
+        location: $scope.location.id
       };
       return commentService.addComment(newComment);
     };
@@ -34,7 +36,7 @@ angular
       const imgWidth = event.srcElement.clientWidth;
       const coordinates = {
         x: event.layerX / imgWidth * 100,
-        y: event.layerY / imgHeight * 100,
+        y: event.layerY / imgHeight * 100
       };
 
       $mdDialog
@@ -44,7 +46,7 @@ angular
           parent: angular.element(document.body),
           targetEvent: event,
           clickOutsideToClose: true,
-          fullscreen: true,
+          fullscreen: true
         })
         .then(response => addComment(response, coordinates))
         .then((response) => {

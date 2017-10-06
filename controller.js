@@ -13,7 +13,7 @@ const getUsers = (req, res) => {
 const getLocations = (req, res) => {
   console.log(req.user);
   const db = req.app.get('db');
-  db.getLocations(req.user.userid).then(response => res.send(response));
+  db.getLocations(req.user.username).then(response => res.send(response));
 };
 const getLocation = (req, res) => {
   const db = req.app.get('db');
@@ -22,11 +22,13 @@ const getLocation = (req, res) => {
 const addLocation = (req, res) => {
   const db = req.app.get('db');
   const {
-    id, name, latitude, longitude, floorplan, district, active
+    id, name, latitude, longitude, floorplan, district, active, allowedUsers
   } = req.body;
-  console.log(floorplan);
+  const permissions = allowedUsers.map(user => ({ userid: user, location: id }));
+  console.log(permissions);
   db
     .addLocation([id, name, latitude, longitude, floorplan, district, active])
+    .then(() => db.location_permissions.insert(permissions))
     .then(response => res.send(response));
 };
 const getComments = (req, res) => {

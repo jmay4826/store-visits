@@ -1,11 +1,20 @@
 function authorized(authService, $q, $state) {
   const defer = $q.defer();
-  if (authService.getCurrentUser()) {
-    defer.resolve(authService.getCurrentUser());
-  } else {
-    $state.go('login', { error: 'You must be logged in to continue' });
-    defer.reject('not logged in');
-  }
+  authService.getCurrentUser().then((response) => {
+    console.log(response);
+    if (!response) {
+      $state.go('login', { error: 'You must be logged in to continue' });
+      defer.reject('not logged in');
+    } else {
+      defer.resolve(response);
+    }
+  });
+  // if (authService.getCurrentUser()) {
+  //   defer.resolve(authService.getCurrentUser());
+  // } else {
+  //   $state.go('login', { error: 'You must be logged in to continue' });
+  //   defer.reject('not logged in');
+  // }
   return defer.promise;
 }
 
@@ -33,7 +42,10 @@ angular
         templateUrl: './locations/new/newLocation.template.html',
         controller: 'newLocationController',
         resolve: {
-          authorized
+          authorized,
+          users(userService) {
+            return userService.getUsers();
+          }
         }
       })
       .state('locations', {

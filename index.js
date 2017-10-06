@@ -50,6 +50,16 @@ passport.use(new LocalStrategy(function (username, password, done) {
 
 massive(process.env.DATABASE_URL).then(dbInstance => app.set('db', dbInstance));
 
+const isLoggedIn = function (req, res, next) {
+  if (!req.user) {
+    console.log('not logged in');
+    return res.status(401).json('not logged in');
+  }
+  return next();
+};
+
+app.get('/authcheck', isLoggedIn, (req, res) => res.json(req.user));
+
 app.post('/auth/login', passport.authenticate('local', { failureFlash: true }), (req, res) =>
   res.send(req.session));
 
@@ -63,14 +73,8 @@ app.post('/auth/register', (req, res) => {
   });
 });
 
-const isLoggedIn = function (req, res, next) {
-  if (!req.user) {
-    return res.status(401).json('not logged in');
-  }
-  return next();
-};
-
 app.get('/firstrun', controller.firstrun);
+app.get('/api/users', isLoggedIn, controller.getUsers);
 app.get('/api/location/:id', isLoggedIn, controller.getLocation);
 app.get('/api/locations', isLoggedIn, controller.getLocations);
 app.get('/api/location/:id/comments', isLoggedIn, controller.getComments);

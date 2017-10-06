@@ -5,7 +5,10 @@ require('dotenv').config();
 
 aws.config.region = 'us-east-2';
 
-// ////AUTH//////
+const getUsers = (req, res) => {
+  const db = req.app.get('db');
+  db.getUsers().then(response => res.json(response));
+};
 
 const getLocations = (req, res) => {
   console.log(req.user);
@@ -89,5 +92,6 @@ module.exports = {
   signS3,
   addComment,
   deleteComment,
-  firstrun
+  firstrun,
+  getUsers
 };

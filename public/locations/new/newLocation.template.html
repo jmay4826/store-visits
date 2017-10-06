@@ -3,7 +3,8 @@
         <md-card>
             <md-card-title>
                 <md-card-title-text>
-                    <span class="md-headline"><md-icon>add</md-icon> Add New Location</span>
+                    <span class="md-headline">
+                        <md-icon>add</md-icon> Add New Location</span>
                 </md-card-title-text>
             </md-card-title>
             <form name='newLocationForm' id='newLocationForm'>
@@ -48,9 +49,17 @@
                                     </md-switch>
                                 </div>
                             </div>
+                            <div>
+                                <md-input-container>
+                                    <label for="allowedUsers ">Allowed Users</label>
+                                    <md-select multiple name="allowedUsers " ng-model="allowedUsers ">
+                                        <md-option ng-repeat="user in users " value="{{user.username}} ">{{user.username}}</md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
                         </div>
                     </div>
-                    <md-button ng-click="addLocation()">Submit</md-button>
+                    <md-button ng-click="addLocation() ">Submit</md-button>
 
                 </md-card-content>
             </form>
@@ -58,4 +67,4 @@
         </md-card>
     </div>
 </div>
-<img src="https://s3.us-east-2.amazonaws.com/floorplans-uploads/thisisanewname.png" alt="">
+<img src="https://s3.us-east-2.amazonaws.com/floorplans-uploads/thisisanewname.png " alt=" ">

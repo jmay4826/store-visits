@@ -1,6 +1,8 @@
 angular
   .module('floorplan')
-  .controller('newLocationController', function ($scope, locationService, uploadService) {
+  .controller('newLocationController', function ($scope, users, locationService, uploadService) {
+    $scope.users = users;
+
     let floorplanUrl = '';
     $scope.addLocation = function () {
       uploadService
@@ -18,7 +20,7 @@ angular
             longitude: $scope.longitude,
             floorplan: floorplanUrl,
             district: $scope.district,
-            active: $scope.active,
+            active: $scope.active
           });
         });
     };

@@ -1,4 +1,4 @@
-angular.module('floorplan').service('authService', function ($http) {
+angular.module('floorplan').service('authService', function ($http, $q) {
   let currentUser;
   this.login = (username, password) =>
     $http.post('/auth/login', { username, password }).then((response) => {
@@ -6,6 +6,18 @@ angular.module('floorplan').service('authService', function ($http) {
     });
 
   this.getCurrentUser = function () {
-    return currentUser;
+    const defer = $q.defer();
+    if (!currentUser) {
+      $http
+        .get('/authcheck')
+        .then((response) => {
+          currentUser = response.data;
+          defer.resolve(currentUser);
+        })
+        .catch(err => defer.resolve());
+    } else {
+      defer.resolve(currentUser);
+    }
+    return defer.promise;
   };
 });

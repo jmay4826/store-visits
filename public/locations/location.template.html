@@ -1,7 +1,6 @@
 <div layout="column" layout-align="center center">
     <span class="md-headline">{{location.name}}</span>
     <span class="md-subhead">({{location.id}})</span>
-    <span class="md-subhead">({{user}})</span>
     <div class="simple-card" id="markerHolder">
         <img style="max-height: 80vh; max-width: 100vh" ng-src="{{S3PATH + location.floorplan}}" ng-click="showModal($event)" alt="">
 
@@ -9,12 +8,12 @@
             <span class="number">
                 <a ng-click="highlighted=comment.id" href='#{{comment.id}}' du-smooth-scroll>{{$index + 1}}</a>
             </span>
-            <!-- <span class="number">{{comment.id}}</span> -->
         </div>
 
     </div>
-    <div layout="row" layout-wrap layout-align="center center">
-        <div ng-repeat="comment in comments track by comment.id" flex="50">
+    <span class="md-headline">Comments ({{comments.length}})</span>
+    <div layout="column" layout-wrap layout-align="center center" style="width: 100%">
+        <div ng-repeat="comment in comments track by comment.id" style="width: 75%">
             <md-card id="{{comment.id}}">
                 <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
                     alt="{{comment.id}}">

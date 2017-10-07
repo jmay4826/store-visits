@@ -11,6 +11,24 @@
 </head>
 
 <body>
+    <md-toolbar class="md-hue-2" ng-controller="headerController">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings">
+                <md-icon>menu</md-icon>
+            </md-button>
+
+            <h2 flex md-truncate>{{title()}}</h2>
+
+            <md-button class="md-icon-button" aria-label="Favorite">
+                <md-icon style="color: greenyellow;">favorite</md-icon>
+            </md-button>
+
+            <md-button class="md-icon-button" aria-label="More">
+                <md-icon>more_vert</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
     <div ui-view></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
@@ -23,11 +41,13 @@
 <script src="./js/ng-file-upload/ng-file-upload.js"></script>
 <script src="./js/angular-scroll.js"></script>
 <script src="./app.js"></script>
+<script src="./services/header.service.js"></script>
 <script src="./services/auth.service.js"></script>
 <script src="./services/user.service.js"></script>
 <script src="./services/location.service.js"></script>
 <script src="./services/comment.service.js"></script>
 <script src="./services/upload.service.js"></script>
+<script src="./header.controller.js"></script>
 <script src="./home/home.controller.js"></script>
 <script src="./login/login.controller.js"></script>
 <script src="./register/register.controller.js"></script>

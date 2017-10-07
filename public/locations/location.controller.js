@@ -6,13 +6,15 @@ angular
     comments,
     location,
     $mdDialog,
-    authorized
+    authorized,
+    headerService
   ) {
     $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     $scope.comments = comments;
     [$scope.location] = location;
-
     $scope.user = authorized;
+
+    headerService.setTitle(`${$scope.location.name} (${$scope.location.id})`);
 
     const addComment = (comment, coordinates) => {
       const newComment = {

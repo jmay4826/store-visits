@@ -1,9 +1,16 @@
-<h1>Choose a location</h1>
-<h2>{{serviceTest}}</h2>
-{{currentUser}}
 <md-card>
+    <div flex="row" layout-margin>
+        <div ng-if="user.type === 'admin'">
+            <md-button ui-sref="newLocation">
+                <md-icon>add</md-icon> Add New Location
+            </md-button>
+        </div>
+        <md-input-container>
+            <input type="text" placeholder="Search" ng-model="searchFilter">
+        </md-input-container>
+    </div>
     <ul>
-        <li ng-repeat="location in locations">
+        <li ng-repeat="location in locations | filter: searchFilter">
             <md-button ui-sref="location({id: location.id})">{{location.name}} - {{location.id}}</md-button>
         </li>
     </ul>

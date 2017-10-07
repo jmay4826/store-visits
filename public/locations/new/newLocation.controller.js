@@ -5,10 +5,11 @@ angular
     $state,
     users,
     locationService,
-    uploadService
+    uploadService,
+    headerService
   ) {
     $scope.users = users;
-
+    headerService.setTitle('Add new location');
     let floorplanUrl = '';
     $scope.addLocation = function () {
       uploadService

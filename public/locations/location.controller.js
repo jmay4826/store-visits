@@ -11,7 +11,8 @@ angular
     $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     $scope.comments = comments;
     [$scope.location] = location;
-    $scope.user = authorized.username;
+
+    $scope.user = authorized;
 
     const addComment = (comment, coordinates) => {
       const newComment = {
@@ -20,7 +21,7 @@ angular
         tags: comment.tags,
         x: coordinates.x,
         y: coordinates.y,
-        author: $scope.user,
+        author: $scope.user.username,
         location: $scope.location.id
       };
       return commentService.addComment(newComment);

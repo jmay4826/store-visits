@@ -14,30 +14,34 @@
 
     </div>
     <div layout="row" layout-wrap layout-align="center center">
-        <md-card ng-repeat="comment in comments track by comment.id" id="{{comment.id}}" flex="75">
-            <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
-                alt="{{comment.id}}">
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">{{$index + 1}}</span>
-                    <span class="md-subhead">{{comment.created_at | date : 'medium'}}</span>
-                </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-                <p>
-                    {{comment.content}}
-                </p>
-            </md-card-content>
-            <md-card-actions layout='row' layout-align='end center'>
-                <md-button class="md-icon-button" ng-click="archiveComment(comment.id, $index)">
-                    <md-icon>check</md-icon>
-                </md-button>
-                <md-button ng-if="user === comment.author" class="md-icon-button" ng-click="deleteComment(comment.id, $index)">
-                    <md-icon>delete</md-icon>
-                </md-button>
+        <div ng-repeat="comment in comments track by comment.id" flex="50">
+            <md-card id="{{comment.id}}">
+                <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
+                    alt="{{comment.id}}">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{$index + 1}}</span>
+                        <span class="md-subhead">
+                            {{comment.created_at | date : 'medium'}} | {{comment.author}}
+                        </span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <p>
+                        {{comment.content}}
+                    </p>
+                </md-card-content>
+                <md-card-actions layout='row' layout-align='end center'>
 
-            </md-card-actions>
-        </md-card>
+                    <md-button class="md-icon-button" ng-click="archiveComment(comment.id, $index)">
+                        <md-icon>check</md-icon>
+                    </md-button>
+                    <md-button ng-if="user.type === 'admin' || user === comment.author" class="md-icon-button" ng-click="deleteComment(comment.id, $index)">
+                        <md-icon>delete</md-icon>
+                    </md-button>
 
+                </md-card-actions>
+            </md-card>
+        </div>
     </div>
 </div>

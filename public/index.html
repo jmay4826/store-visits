@@ -11,24 +11,61 @@
 </head>
 
 <body>
-    <md-toolbar class="md-hue-2" ng-controller="headerController">
-        <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Settings">
-                <md-icon>menu</md-icon>
-            </md-button>
+    <div ng-controller="headerController">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <md-button ng-click="toggleNav()" class="md-icon-button" aria-label="Settings">
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <h2 flex md-truncate>{{title()}}</h2>
+                <md-button class="md-icon-button" aria-label="Favorite">
+                    <md-icon style="color: greenyellow;">favorite</md-icon>
+                </md-button>
 
-            <h2 flex md-truncate>{{title()}}</h2>
+                <md-button class="md-icon-button" aria-label="More">
+                    <md-icon>more_vert</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
 
-            <md-button class="md-icon-button" aria-label="Favorite">
-                <md-icon style="color: greenyellow;">favorite</md-icon>
-            </md-button>
+        <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="nav">
 
-            <md-button class="md-icon-button" aria-label="More">
-                <md-icon>more_vert</md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
+            <md-toolbar class="md-theme-light">
+                <h1 class="md-toolbar-tools">Menu</h1>
+            </md-toolbar>
+            <md-content layout-padding>
+                <md-list flex>
+                    <md-list-item class="md-2-line" ng-click="null" ui-sref="home">
+                        <md-icon class="md-avatar-icon">home</md-icon>
+                        <div class="md-list-item-text" layout="column">
+                            <h3>Home</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" ui-sref="locations">
+                        <md-icon class="md-avatar-icon">store_mall_directory</md-icon>
+                        <div class="md-list-item-text" layout="column">
+                            <h3>Locations</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item ng-if="user.type === 'admin'" class="md-2-line" ng-click="null" ui-sref="newLocation">
+                        <md-icon class="md-avatar-icon">create</md-icon>
+                        <div class="md-list-item-text" layout="column">
+                            <h3>New Location</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line" ng-click="null" ui-sref="">
+                        <md-icon class="md-avatar-icon">pie_chart</md-icon>
+                        <div class="md-list-item-text" layout="column">
+                            <h3>Analytics</h3>
+                        </div>
+                    </md-list-item>
+                    <md-divider></md-divider>
 
+                </md-list>
+            </md-content>
+
+        </md-sidenav>
+    </div>
     <div ui-view></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>

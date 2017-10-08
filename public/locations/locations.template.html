@@ -1,17 +1,23 @@
-<md-card>
-    <div flex="row" layout-margin>
-        <div ng-if="user.type === 'admin'">
-            <md-button ui-sref="newLocation">
-                <md-icon>add</md-icon> Add New Location
-            </md-button>
+<div layout="row" layout-align="center">
+    <md-card flex-gt-sm="75" flex="100">
+        <div layout layout-align="center">
+            <md-input-container flex="75">
+                <input type="text" placeholder="Search" ng-model="searchFilter">
+            </md-input-container>
         </div>
-        <md-input-container>
-            <input type="text" placeholder="Search" ng-model="searchFilter">
-        </md-input-container>
-    </div>
-    <ul>
-        <li ng-repeat="location in locations | filter: searchFilter">
-            <md-button ui-sref="location({id: location.id})">{{location.name}} - {{location.id}}</md-button>
-        </li>
-    </ul>
-</md-card>
+        <div>
+            <ul>
+                <li ng-repeat="location in locations | filter: searchFilter | orderBy: 'name'">
+                    <md-button ui-sref="location({id: location.id})">{{location.name}} - {{location.id}}</md-button>
+                </li>
+            </ul>
+        </div>
+        <md-card-actions>
+            <div ng-if="user.type === 'admin'" layout="row" layout-align="end">
+                <md-button ui-sref="newLocation">
+                    <md-icon>add</md-icon> Add New Location
+                </md-button>
+            </div>
+        </md-card-actions>
+    </md-card>
+</div>

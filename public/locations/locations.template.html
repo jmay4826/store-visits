@@ -4,7 +4,11 @@
             <md-input-container flex="100">
                 <input type="text" placeholder="Search" ng-model="searchFilter">
             </md-input-container>
-
+            <div ng-if="user.type === 'admin'" flex="100">
+                <md-button ui-sref="newLocation">
+                    <md-icon>add</md-icon> Add New Location
+                </md-button>
+            </div>
             <md-list flex="100" layout="row" layout-wrap>
                 <md-list-item class="md-2-line" ng-repeat="location in locations | filter: searchFilter | orderBy: 'name'" ui-sref="location({id: location.id})">
                     <div class="md-list-item-text">
@@ -14,12 +18,8 @@
                 </md-list-item>
             </md-list>
         </div>
-        <md-card-actions>
-            <div ng-if="user.type === 'admin'" layout="row" layout-align="end">
-                <md-button ui-sref="newLocation">
-                    <md-icon>add</md-icon> Add New Location
-                </md-button>
-            </div>
-        </md-card-actions>
+
+
+
     </md-card>
 </div>

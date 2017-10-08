@@ -73,6 +73,11 @@ app.post('/auth/register', (req, res) => {
   });
 });
 
+app.get('/auth/logout', (req, res) => {
+  req.logout();
+  res.json('ok');
+});
+
 app.get('/firstrun', controller.firstrun);
 app.get('/api/users', isLoggedIn, controller.getUsers);
 app.get('/api/location/:id', isLoggedIn, controller.getLocation);

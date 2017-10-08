@@ -10,7 +10,7 @@ angular.module('floorplan').service('authService', function ($http, $q) {
       that.currentUser.username = response.data.passport.user.username;
     });
   this.register = (username, password) => $http.post('/auth/register', { username, password });
-
+  this.logout = () => $http.get('/auth/logout');
   this.getCurrentUser = function () {
     const defer = $q.defer();
     if (!currentUser) {

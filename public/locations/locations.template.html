@@ -14,13 +14,6 @@
                 </md-list-item>
             </md-list>
         </div>
-        <!-- <div>
-            <ul>
-                <li ng-repeat="location in locations | filter: searchFilter | orderBy: 'name'">
-                    <md-button ui-sref="location({id: location.id})">{{location.name}} - {{location.id}}</md-button>
-                </li>
-            </ul>
-        </div> -->
         <md-card-actions>
             <div ng-if="user.type === 'admin'" layout="row" layout-align="end">
                 <md-button ui-sref="newLocation">

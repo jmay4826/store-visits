@@ -5,10 +5,10 @@ angular
     tagService.getTagTemplate().then(response => {
       $scope.categories = response;
     });
-    $scope.addTag = function(tag) {
-      if ($scope.selectedTags.indexOf(tag) === -1) {
-        $scope.selectedTags.push(tag);
-      }
+    $scope.addTag = function(category, subcategory, tagTitle) {
+      // if ($scope.selectedTags.indexOf(tag) === -1) {
+      $scope.selectedTags.push({ category, subcategory, title: tagTitle });
+      // }
     };
 
     $scope.selectedTags = [];
@@ -19,7 +19,7 @@ angular
       comment = {
         image: $scope.image,
         content: $scope.content,
-        tags: $scope.tags
+        tags: $scope.selectedTags
       };
       $mdDialog.hide(comment);
     };

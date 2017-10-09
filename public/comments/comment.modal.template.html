@@ -1,66 +1,66 @@
 <md-dialog aria-label="Add Comment" style="min-width: 75%">
-    <form ng-cloak>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Add Comment</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon aria-label="Close dialog">close</md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
 
-        <md-dialog-content>
-            <div class="md-dialog-content">
-                <form name='newCommentForm' id='newCommentForm'>
-                    <div layout="column" layout-padding>
-                        <div layout="column" layout-align="space between center">
-                            <!-- maybe one day allow multiple images? -->
-                            <img ngf-src="image || '../../images/thumbnail.svg'" ngf-no-object-url="true" style="max-height: 200px; max-width: 200px">
-                            <md-button ngf-select ngf-change="sign($file)" ng-model="image" name="image" ngf-pattern="'image/*'" ngf-accept="'image/*'"
-                                ngf-max-size="10MB" ngf-min-height="100">Add an Image</md-button>
-                        </div>
-                        <md-input-container>
-                            <label for="content">Enter Comment</label>
-                            <textarea name="content" ng-model="content"></textarea>
-                        </md-input-container>
-                        <div>
-                            <md-chips ng-model="selectedTags">
-                                <md-chip-template>
-                                    <strong>{{$chip.title}}</strong>
-                                </md-chip-template>
-                            </md-chips>
-                        </div>
-                        <div ng-repeat="(category, subcategories) in categories track by $index" ng-init="categoryIndex = $index">
-                            <span ng-click="shown[category]=!shown[category]">
-                                <md-icon ng-show="shown[category]">remove</md-icon>
-                                <md-icon ng-show="!shown[category]">add</md-icon>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add Comment</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="Close dialog">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name='newCommentForm' id='newCommentForm'>
+                <div layout="column" layout-padding>
+                    <div layout="column" layout-align="space between center">
+                        <!-- maybe one day allow multiple images? -->
+                        <img ngf-src="image || '../../images/thumbnail.svg'" ngf-no-object-url="true" style="max-height: 200px; max-width: 200px">
+                        <md-button ngf-select ngf-change="sign($file)" ng-model="image" name="image" ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                            ngf-max-size="10MB" ngf-min-height="100">Add an Image</md-button>
+                    </div>
+                    <md-input-container>
+                        <label for="content">Enter Comment</label>
+                        <textarea name="content" ng-model="content"></textarea>
+                    </md-input-container>
+                    <div>
+                        <md-chips ng-model="selectedTags">
+                            <md-chip-template>
+                                <strong>{{$chip.title}}</strong>
+                            </md-chip-template>
+                        </md-chips>
+                    </div>
+                    <div ng-repeat="(category, subcategories) in categories track by $index" ng-init="categoryIndex = $index">
+                        <span ng-click="shown[category]=!shown[category]">
+                            <md-icon ng-show="shown[category]">remove</md-icon>
+                            <md-icon ng-show="!shown[category]">add</md-icon>
+                        </span>
+                        {{category}}
+                        <div ng-show="shown[category]" ng-repeat="(subcategory, tags) in subcategories track by $index" ng-init="subcategoryIndex = $index"
+                            style="padding-left: 20px;">
+                            <span ng-click="shown[subcategory]=!shown[subcategory]">
+                                <md-icon ng-show="shown[subcategory]">remove</md-icon>
+                                <md-icon ng-show="!shown[subcategory]">add</md-icon>
                             </span>
-                            {{category}}
-                            <div ng-show="shown[category]" ng-repeat="(subcategory, tags) in subcategories track by $index" ng-init="subcategoryIndex = $index"
-                                style="padding-left: 20px;">
-                                <span ng-click="shown[subcategory]=!shown[subcategory]">
-                                    <md-icon ng-show="shown[subcategory]">remove</md-icon>
-                                    <md-icon ng-show="!shown[subcategory]">add</md-icon>
-                                </span>
-                                {{subcategory}}
-                                <div ng-show="shown[subcategory]" style="padding-left: 20px;">
-                                    <md-button ng-repeat="tag in tags" ng-click="addTag(tag)">{{tag.title}}</md-button>
-                                </div>
+                            {{subcategory}}
+                            <div ng-show="shown[subcategory]" style="padding-left: 20px;">
+                                <md-button ng-repeat="tag in tags" ng-click="addTag(category, subcategory, tag.title)">{{tag.title}}</md-button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        </md-dialog-content>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
 
-        <md-dialog-actions layout="row">
-            <md-button ng-click="cancel()">
-                Cancel
-            </md-button>
-            <md-button ng-click="addComment()">
-                Submit
-            </md-button>
-        </md-dialog-actions>
-    </form>
+    <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()">
+            Cancel
+        </md-button>
+        <md-button ng-click="addComment()">
+            Submit
+        </md-button>
+    </md-dialog-actions>
+
 </md-dialog>

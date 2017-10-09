@@ -7,7 +7,8 @@ angular
     location,
     $mdDialog,
     authorized,
-    headerService
+    headerService,
+    $state
   ) {
     $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     $scope.comments = comments;
@@ -53,7 +54,9 @@ angular
         })
         .then(response => addComment(response, coordinates))
         .then((response) => {
-          $scope.comments.push(response.data[0]);
+          // $scope.comments.push(response.data[0]);
+          // maybe we could find a better way to do this to avoid the flash on reload?
+          $state.reload();
         });
 
       // This might not work in all browsers....but neither will flexbox sooooo

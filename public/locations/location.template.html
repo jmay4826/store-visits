@@ -1,6 +1,6 @@
 <div layout="column" layout-align="center center">
     <div class="simple-card" id="markerHolder">
-        <img style="max-height: 80vh; max-width: 100vh" ng-src="{{S3PATH + location.floorplan}}" ng-click="showModal($event)" alt="">
+        <img style="max-height: 80vh; max-width: 100vh;" ng-src="{{S3PATH + location.floorplan}}" ng-click="showModal($event)" alt="">
 
         <div class="marker" ng-repeat="comment in comments track by comment.id" style="position: absolute; left: {{comment.x}}%; top: {{comment.y}}%">
             <span class="number">
@@ -24,6 +24,13 @@
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
+                    <p>
+                        <md-chips ng-model="comment.tags" readonly="true">
+                            <md-chip-template>
+                                {{$chip.category }} - {{$chip.subcategory}} - {{$chip.title}}
+                            </md-chip-template>
+                        </md-chips>
+                    </p>
                     <p>
                         {{comment.content}}
                     </p>

@@ -12,7 +12,14 @@ const getUsers = (req, res) => {
 
 const getTags = (req, res) => {
   const db = req.app.get('db');
-  db.getTags(req.params.commentid).then(response => res.json(response));
+  console.log(req.body);
+  db.getTags(req.body.id).then(response => res.json(response));
+};
+
+const getTagTemplate = (req, res) => {
+  const db = req.app.get('db');
+  console.log(req.body);
+  db.getTags(req.params.id).then(response => res.json(response));
 };
 
 const addTags = (req, res) => {
@@ -51,7 +58,10 @@ const addLocation = (req, res) => {
 };
 const getComments = (req, res) => {
   const db = req.app.get('db');
-  db.getComments(req.params.id).then(response => res.send(response));
+  db.getComments(req.params.id).then((response) => {
+    console.log(response);
+    return res.send(response);
+  });
 };
 const signS3 = (req, res) => {
   const { S3_BUCKET } = process.env;
@@ -115,5 +125,6 @@ module.exports = {
   firstrun,
   getUsers,
   addTags,
-  getTags
+  getTags,
+  getTagTemplate
 };

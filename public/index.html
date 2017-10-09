@@ -12,7 +12,7 @@
 
 <body>
     <div ng-controller="headerController">
-        <md-toolbar class="md-hue-2">
+        <md-toolbar class="md-hue-2" style="position: fixed">
             <div class="md-toolbar-tools">
                 <md-button ng-click="toggleNav()" class="md-icon-button" aria-label="Settings">
                     <md-icon>menu</md-icon>
@@ -69,7 +69,7 @@
 
         </md-sidenav>
     </div>
-    <div ui-view></div>
+    <div ui-view style="padding-top: 64px"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>

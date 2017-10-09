@@ -1,22 +1,24 @@
 angular.module('floorplan').service('tagService', function ($http) {
-  const TEMPLATE_COMMENT_ID = 105;
-  // this.getComments = id => $http.get(`/api/location/${id}/comments`);
+  const TEMPLATE_COMMENT_ID = 'template';
+  this.getTags = id => $http.put('/api/tags', { id });
   this.addTags = tags => $http.post('/api/tags', { tags, comment: TEMPLATE_COMMENT_ID });
-  this.getTagTemplate = () => $http.get(`/api/tags/${TEMPLATE_COMMENT_ID}`).then((response) => {
-    const categories = {};
-    if (!response.data.length) return;
-    response.data.forEach((tag) => {
-      if (!categories[tag.category]) {
-        categories[tag.category] = {};
-      }
-      if (!categories[tag.category][tag.subcategory]) {
-        categories[tag.category][tag.subcategory] = [];
-      }
-      categories[tag.category][tag.subcategory].push({ title: tag.title });
+  this.addTagsByCommentId = (tags, id) => $http.post('/api/tags', { tags, comment: id });
+  this.getTagTemplate = () =>
+    $http.get(`/api/tags/${TEMPLATE_COMMENT_ID}`).then((response) => {
+      const categories = {};
+      if (!response.data.length) return;
+      response.data.forEach((tag) => {
+        if (!categories[tag.category]) {
+          categories[tag.category] = {};
+        }
+        if (!categories[tag.category][tag.subcategory]) {
+          categories[tag.category][tag.subcategory] = [];
+        }
+        categories[tag.category][tag.subcategory].push({ title: tag.title });
+      });
+      console.log(categories);
+      return categories;
     });
-    console.log(categories);
-    return categories;
-  });
 
   this.addTagTemplate = (categories) => {
     let tagSql = [];

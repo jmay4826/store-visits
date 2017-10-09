@@ -1,0 +1,39 @@
+<md-card>
+    <form>
+        <md-button ng-click="addCategory()">+Add Category</md-button>
+        <div ng-repeat="(category, subcategories) in categories track by $index" ng-init="categoryIndex = $index">
+            <span ng-click="hidden[category]=!hidden[category]">
+                <md-icon ng-show="hidden[category]">add</md-icon>
+                <md-icon ng-show="!hidden[category]">remove</md-icon>
+            </span>
+            <md-input-container class="dense">
+                <label for="category">Category</label>
+                <input type="text" ng-model="category">
+            </md-input-container>
+            <div ng-hide="hidden[category]" ng-repeat="(subcategory, tags) in subcategories track by $index" ng-init="subcategoryIndex = $index"
+                style="padding-left: 100px;">
+                <span ng-click="hidden[subcategory]=!hidden[subcategory]">
+                    <md-icon ng-show="hidden[subcategory]">add</md-icon>
+                    <md-icon ng-show="!hidden[subcategory]">remove</md-icon>
+                </span>
+                <md-input-container class="dense">
+                    <label for="subcategory">Subcategory</label>
+                    <input type="text" ng-model="subcategory">
+                </md-input-container>
+                +
+                <md-button ng-click="addSubcategory(category)">Add Subcategory</md-button>
+                <div ng-hide="hidden[subcategory]" ng-repeat="tag in tags track by $index" style="padding-left: 100px;">
+                    <md-input-container class="dense">
+                        <label for="tag">Tag</label>
+                        <input type="text" ng-model="tag.title">
+                    </md-input-container>
+                    <md-button ng-show="$last" ng-click="addTag(category, subcategory)">Add Tag</md-button>
+
+                </div>
+            </div>
+        </div>
+        <md-button ng-click="saveTags()">Save</md-button>
+
+    </form>
+</md-card>
+{{categories}}

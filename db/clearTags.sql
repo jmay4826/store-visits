@@ -1,0 +1,1 @@
+DELETE FROM tags WHERE comment_id = $1;

@@ -89,6 +89,30 @@ angular
             return locationService.getLocation($stateParams.id).then(response => response.data);
           }
         }
+      })
+      .state('tagsAdmin', {
+        url: '/admin/tags',
+        templateUrl: './admin/tags.admin.template.html',
+        controller: 'tagsAdminController',
+        resolve: {
+          existingTags(tagService) {
+            return tagService.getTagTemplate().then((response) => {
+              const categories = {};
+              if (!response.data.length) return;
+              response.data.forEach((tag) => {
+                if (!categories[tag.category]) {
+                  categories[tag.category] = {};
+                }
+                if (!categories[tag.category][tag.subcategory]) {
+                  categories[tag.category][tag.subcategory] = [];
+                }
+                categories[tag.category][tag.subcategory].push({ title: tag.title });
+              });
+              console.log(categories);
+              return categories;
+            });
+          }
+        }
       });
   })
   .config(function ($mdThemingProvider) {

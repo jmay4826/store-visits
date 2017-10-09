@@ -1,0 +1,1 @@
+SELECT * FROM tags WHERE comment_id = $1;

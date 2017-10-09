@@ -10,6 +10,24 @@ const getUsers = (req, res) => {
   db.getUsers().then(response => res.json(response));
 };
 
+const getTags = (req, res) => {
+  const db = req.app.get('db');
+  db.getTags(req.params.commentid).then(response => res.json(response));
+};
+
+const addTags = (req, res) => {
+  const db = req.app.get('db');
+  const tags = req.body.tags.map(tag => ({
+    title: tag.title,
+    category: tag.category,
+    subcategory: tag.subcategory,
+    comment_id: req.body.comment
+  }));
+  console.log(tags);
+  db.clearTags(tags[0].comment_id).then((response) => {
+    db.tags.insert(tags).then(response => res.json(response));
+  });
+};
 const getLocations = (req, res) => {
   console.log(req.user);
   const db = req.app.get('db');
@@ -95,5 +113,7 @@ module.exports = {
   addComment,
   deleteComment,
   firstrun,
-  getUsers
+  getUsers,
+  addTags,
+  getTags
 };

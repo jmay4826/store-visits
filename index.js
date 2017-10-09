@@ -83,8 +83,10 @@ app.get('/api/users', isLoggedIn, controller.getUsers);
 app.get('/api/location/:id', isLoggedIn, controller.getLocation);
 app.get('/api/locations', isLoggedIn, controller.getLocations);
 app.get('/api/location/:id/comments', isLoggedIn, controller.getComments);
+app.get('/api/tags/:commentid', isLoggedIn, controller.getTags);
 app.post('/api/location/:id/comments/new', isLoggedIn, controller.addComment);
 app.post('/api/locations/new', isLoggedIn, controller.addLocation);
+app.post('/api/tags', isLoggedIn, controller.addTags);
 app.get('/sign-s3', isLoggedIn, controller.signS3);
 app.delete('/api/comment/:id', isLoggedIn, controller.deleteComment);
 

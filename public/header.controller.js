@@ -11,7 +11,7 @@ angular
       console.log('logout');
       authService.logout().then((response) => {
         console.log(response);
-        $state.go('home');
+        $state.go('login');
       });
     };
   });

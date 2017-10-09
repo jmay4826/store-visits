@@ -19,7 +19,14 @@ function authorized(authService, $q, $state) {
 }
 
 angular
-  .module('floorplan', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngFileUpload', 'duScroll'])
+  .module('floorplan', [
+    'ui.router',
+    'ngMaterial',
+    'ngAnimate',
+    'ngFileUpload',
+    'duScroll',
+    'ngMessages'
+  ])
   .config(function ($stateProvider, $urlRouterProvider) {
     //* **TEMPORARY***CHANGE OTHERWISE TO /
     $urlRouterProvider.otherwise('/locations');
@@ -116,5 +123,5 @@ angular
       });
   })
   .config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default');
+    $mdThemingProvider.theme('default').primaryPalette('pink');
   });

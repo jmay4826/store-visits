@@ -1,6 +1,32 @@
-<form>
-    <input type="text" ng-model="username" placeholder="Username">
-    <input type="password" ng-model="password" placeholder="Password">
-    <md-button ng-click="login()">Submit</md-button>
+<form name="loginForm" ng-submit="login()">
+    <div layout="row" layout-align="center">
+        <md-card flex-gt-sm="75" flex="100" layout="column">
+            <div layout="row" layout-wrap layout-align="center">
+                <md-input-container flex="75">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" ng-model="username" required md-no-asterisk>
+                    <div ng-messages="loginForm.username.$error">
+                        <div ng-message="required">
+                            Please enter a username.
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="75">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" ng-model="password" required md-no-asterisk minlength="8">
+                    <div ng-messages="loginForm.password.$error">
+                        <div ng-message="minlength || required">
+                            Passwords must have at least 8 characters.
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+            <md-card-actions layout="row" layout-align="end">
+                <md-button ui-sref="register">Register</md-button>
+                <md-button ng-click="login()">Submit</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
 </form>
+
 {{response}} {{error}}

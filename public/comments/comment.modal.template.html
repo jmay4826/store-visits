@@ -1,4 +1,4 @@
-<md-dialog aria-label="Add Comment">
+<md-dialog aria-label="Add Comment" style="min-width: 75%">
     <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -12,7 +12,6 @@
 
         <md-dialog-content>
             <div class="md-dialog-content">
-                <!-- <h2>Using .md-dialog-content class that sets the padding as the spec</h2> -->
                 <form name='newCommentForm' id='newCommentForm'>
                     <div layout="column" layout-padding>
                         <div layout="column" layout-align="space between center">
@@ -25,8 +24,31 @@
                             <label for="content">Enter Comment</label>
                             <textarea name="content" ng-model="content"></textarea>
                         </md-input-container>
-
-                        <md-chips ng-model="tags" placeholder="Add tags (optional)"></md-chips>
+                        <div>
+                            <md-chips ng-model="selectedTags">
+                                <md-chip-template>
+                                    <strong>{{$chip.title}}</strong>
+                                </md-chip-template>
+                            </md-chips>
+                        </div>
+                        <div ng-repeat="(category, subcategories) in categories track by $index" ng-init="categoryIndex = $index">
+                            <span ng-click="shown[category]=!shown[category]">
+                                <md-icon ng-show="shown[category]">remove</md-icon>
+                                <md-icon ng-show="!shown[category]">add</md-icon>
+                            </span>
+                            {{category}}
+                            <div ng-show="shown[category]" ng-repeat="(subcategory, tags) in subcategories track by $index" ng-init="subcategoryIndex = $index"
+                                style="padding-left: 20px;">
+                                <span ng-click="shown[subcategory]=!shown[subcategory]">
+                                    <md-icon ng-show="shown[subcategory]">remove</md-icon>
+                                    <md-icon ng-show="!shown[subcategory]">add</md-icon>
+                                </span>
+                                {{subcategory}}
+                                <div ng-show="shown[subcategory]" style="padding-left: 20px;">
+                                    <md-button ng-repeat="tag in tags" ng-click="addTag(tag)">{{tag.title}}</md-button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

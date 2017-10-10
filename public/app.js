@@ -124,7 +124,12 @@ angular
       .state('analytics', {
         url: '/analytics',
         templateUrl: '/./analytics/analytics.template.html',
-        controller: 'analyticsController'
+        controller: 'analyticsController',
+        resolve: {
+          commentsData(analyticsService) {
+            return analyticsService.getCommentData().then(response => response.data);
+          }
+        }
       });
   })
   .config(function ($mdThemingProvider) {

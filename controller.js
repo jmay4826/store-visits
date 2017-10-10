@@ -49,10 +49,19 @@ const addLocation = (req, res) => {
   const {
     id, name, latitude, longitude, floorplan, district, active, allowedUsers
   } = req.body;
+  console.log(allowedUsers);
   const permissions = allowedUsers.map(user => ({ userid: user, location: id }));
   console.log('add location permissions', permissions);
   db
-    .addLocation([id, name, latitude, longitude, floorplan, district, active])
+    .addLocation({
+      id,
+      name,
+      latitude,
+      longitude,
+      floorplan,
+      district,
+      active
+    })
     .then(() => db.location_permissions.insert(permissions))
     .then(response => res.send(response));
 };
@@ -63,6 +72,12 @@ const getComments = (req, res) => {
     return res.send(response);
   });
 };
+
+const getCommentsData = (req, res) => {
+  const db = req.app.get('db');
+  db.analytics.getCommentCount().then(response => res.json(response));
+};
+
 const signS3 = (req, res) => {
   const { S3_BUCKET } = process.env;
   const s3 = new aws.S3();
@@ -132,5 +147,6 @@ module.exports = {
   addTags,
   getTags,
   getTagTemplate,
-  getAnalytics
+  getAnalytics,
+  getCommentsData
 };

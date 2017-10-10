@@ -84,6 +84,7 @@ app.get('/api/location/:id', isLoggedIn, controller.getLocation);
 app.get('/api/locations', isLoggedIn, controller.getLocations);
 app.get('/api/location/:id/comments', isLoggedIn, controller.getComments);
 app.get('/api/tags/:id', isLoggedIn, controller.getTagTemplate);
+app.get('/api/analytics', isLoggedIn, controller.getAnalytics);
 app.put('/api/tags/', isLoggedIn, controller.getTags);
 app.post('/api/location/:id/comments/new', isLoggedIn, controller.addComment);
 app.post('/api/locations/new', isLoggedIn, controller.addLocation);

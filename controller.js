@@ -114,6 +114,11 @@ const firstrun = (req, res) => {
   db.createTables().then(response => res.redirect('/'));
 };
 
+const getAnalytics = (req, res) => {
+  const db = req.app.get('db');
+  db.analytics.getAllData().then(response => res.json(response));
+};
+
 module.exports = {
   getLocations,
   getLocation,
@@ -126,5 +131,6 @@ module.exports = {
   getUsers,
   addTags,
   getTags,
-  getTagTemplate
+  getTagTemplate,
+  getAnalytics
 };

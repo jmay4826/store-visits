@@ -11,7 +11,7 @@
     </div>
     <span class="md-headline">Comments ({{comments.length}})</span>
     <div layout="column" layout-wrap layout-align="center center" style="width: 100%">
-        <div ng-repeat="comment in comments track by comment.id" style="width: 75%">
+        <div ng-repeat="comment in comments track by comment.id" style="width: 75%" class="removable">
             <md-card id="{{comment.id}}">
                 <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
                     alt="{{comment.id}}">

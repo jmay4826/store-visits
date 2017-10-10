@@ -12,13 +12,13 @@ const getUsers = (req, res) => {
 
 const getTags = (req, res) => {
   const db = req.app.get('db');
-  console.log(req.body);
+  console.log('get tags:', req.body);
   db.getTags(req.body.id).then(response => res.json(response));
 };
 
 const getTagTemplate = (req, res) => {
   const db = req.app.get('db');
-  console.log(req.body);
+  console.log('get tag template:', req.body);
   db.getTags(req.params.id).then(response => res.json(response));
 };
 
@@ -30,13 +30,13 @@ const addTags = (req, res) => {
     subcategory: tag.subcategory,
     comment_id: req.body.comment
   }));
-  console.log(tags);
+  console.log('add tags', tags);
   db.clearTags(tags[0].comment_id).then((response) => {
     db.tags.insert(tags).then(response => res.json(response));
   });
 };
 const getLocations = (req, res) => {
-  console.log(req.user);
+  console.log('get locations', req.user);
   const db = req.app.get('db');
   db.getLocations(req.user.username).then(response => res.send(response));
 };
@@ -50,7 +50,7 @@ const addLocation = (req, res) => {
     id, name, latitude, longitude, floorplan, district, active, allowedUsers
   } = req.body;
   const permissions = allowedUsers.map(user => ({ userid: user, location: id }));
-  console.log(permissions);
+  console.log('add location permissions', permissions);
   db
     .addLocation([id, name, latitude, longitude, floorplan, district, active])
     .then(() => db.location_permissions.insert(permissions))
@@ -59,7 +59,7 @@ const addLocation = (req, res) => {
 const getComments = (req, res) => {
   const db = req.app.get('db');
   db.getComments(req.params.id).then((response) => {
-    console.log(response);
+    console.log('getcomments', response);
     return res.send(response);
   });
 };
@@ -79,7 +79,7 @@ const signS3 = (req, res) => {
 
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if (err) {
-      console.log(err);
+      console.log('get signed url err ', err);
       return res.end();
     }
     const returnData = {

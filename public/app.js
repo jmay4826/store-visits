@@ -120,6 +120,11 @@ angular
             });
           }
         }
+      })
+      .state('analytics', {
+        url: '/analytics',
+        templateUrl: '/./analytics/analytics.template.html',
+        controller: 'analyticsController'
       });
   })
   .config(function ($mdThemingProvider) {

@@ -14,7 +14,7 @@ img:focus {
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-color: rgba(187, 187, 248, 0.9);
+  background-color: rgba(199, 42, 42, 0.342);
   z-index: 1;
   border-radius: 50%;
   transform: translate(-13px, -13px);
@@ -27,20 +27,33 @@ img:focus {
 #markerHolder {
   position: relative;
 }
-
+.ng-animate,
+.ng-animate ~ .removable {
+  transition: all 250ms;
+}
 .ng-leave {
   /* transform: translateX(0px); */
   opacity: 100;
-  transition: all 250ms;
+  transform: translateX(0);
+  /* transition: all 250ms; */
 }
 .ng-leave-active {
   /* transform: scaleY(0.1); */
   opacity: 0;
+  transform: translateX(-100%);
+}
+
+.ng-leave ~ .removable {
+  transform: translateY(0);
+}
+.ng-leave-active ~ .removable {
+  /* this goes up 100% of the CURRENT element height, not the deleted element  */
+  transform: translateY(-100%);
 }
 
 .ng-enter {
   opacity: 0;
-  transition: all 250ms;
+  /* transition: all 250ms; */
 }
 .ng-enter-active {
   opacity: 100;

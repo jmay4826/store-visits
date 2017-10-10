@@ -51,7 +51,7 @@
                             <h3>New Location</h3>
                         </div>
                     </md-list-item>
-                    <md-list-item class="md-2-line" ng-click="null" ui-sref="">
+                    <md-list-item class="md-2-line" ng-click="null" ui-sref="analytics">
                         <md-icon class="md-avatar-icon">pie_chart</md-icon>
                         <div class="md-list-item-text" layout="column">
                             <h3>Analytics</h3>
@@ -69,7 +69,7 @@
 
         </md-sidenav>
     </div>
-    <div ui-view style="padding-top: 64px"></div>
+    <div ui-view style="padding-top: 64px; min-height: 80vh;"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
@@ -97,5 +97,6 @@
 <script src="./locations/new/newLocation.controller.js"></script>
 <script src="./comments/comment.modal.controller.js"></script>
 <script src="./admin/tags.admin.controller.js"></script>
+<script src="./analytics/analytics.controller.js"></script>
 
 </html>

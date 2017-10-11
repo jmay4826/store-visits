@@ -18,21 +18,24 @@
                     <md-icon>menu</md-icon>
                 </md-button>
                 <h2 flex md-truncate>{{title()}}</h2>
-                <md-button class="md-icon-button" aria-label="More">
-                    <md-icon>more_vert</md-icon>
-                </md-button>
-
+                <!-- <md-menu>
+                    <md-button ng-click="toggleMenu($mdMenu)" class="md-icon-button" aria-label="More">
+                        <md-icon>more_vert</md-icon>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item ng-repeat="menuItem in menuItems()">
+                            <md-button ng-click="menuItem.action()">{{menuItem.title}}</md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu> -->
             </div>
         </md-toolbar>
-
         <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="nav">
             <md-toolbar class="md-theme-light">
                 <h1 class="md-toolbar-tools">Menu</h1>
             </md-toolbar>
             <md-content layout-padding>
                 <md-list flex>
-
-
                     <md-list-item class="md-2-line" ng-click="null" ui-sref="home">
                         <md-icon class="md-avatar-icon">home</md-icon>
                         <div class="md-list-item-text" layout="column">
@@ -63,10 +66,8 @@
                             <h3>Logout</h3>
                         </div>
                     </md-list-item>
-
                 </md-list>
             </md-content>
-
         </md-sidenav>
     </div>
     <div ui-view style="padding-top: 64px; min-height: 80vh;"></div>
@@ -76,7 +77,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.js"></script>
 <script src="./js/ng-file-upload/ng-file-upload-shim.min.js"></script>
 <script src="./js/ng-file-upload/ng-file-upload.js"></script>
 <script src="./js/angular-scroll.js"></script>

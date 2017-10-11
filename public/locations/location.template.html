@@ -2,61 +2,142 @@
     <div class="simple-card" id="markerHolder">
         <img style="max-height: 80vh; max-width: 100vh;" ng-src="{{S3PATH + location.floorplan}}" ng-click="showModal($event)" alt="">
 
-        <div class="marker" ng-repeat="comment in comments track by comment.id" style="position: absolute; left: {{comment.x}}%; top: {{comment.y}}%">
+        <div class="marker" ng-repeat="comment in comments | filter: whichComments track by comment.id" style="position: absolute; left: {{comment.x}}%; top: {{comment.y}}%">
             <span class="number">
                 <a ng-click="highlighted=comment.id" href='#{{comment.id}}' du-smooth-scroll>{{$index + 1}}</a>
             </span>
         </div>
 
     </div>
-    <span class="md-headline">Comments ({{comments.length}})</span>
-    <div layout="column" layout-wrap layout-align="center center" style="width: 100%">
-        <div ng-repeat="comment in comments track by comment.id" style="width: 75%" class="removable">
-            <md-card id="{{comment.id}}">
-                <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
-                    alt="{{comment.id}}">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">{{$index + 1}}</span>
-                        <span class="md-subhead">
-                            {{comment.created_at | date : 'medium'}} | {{comment.author}}
-                        </span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                    <p>
-                        <md-chips ng-model="comment.tags" readonly="true">
-                            <md-chip-template>
-                                {{$chip.category }} - {{$chip.subcategory}} - {{$chip.title}}
-                            </md-chip-template>
-                        </md-chips>
-                    </p>
-                    <p>
-                        {{comment.content}}
-                    </p>
-                </md-card-content>
-                <md-card-actions layout='row' layout-align='end center'>
-                    <md-button class="md-icon-button" ng-click="shownReplies[comment.id] = !shownReplies[comment.id]">
-                        <md-icon>reply</md-icon>
-                    </md-button>
-                    <md-button class="md-icon-button" ng-click="updateComment(comment.id, $index)">
-                        <md-icon>archive</md-icon>
-                    </md-button>
-                    <md-button ng-if="user.type === 'admin' || user === comment.author" class="md-icon-button" ng-click="deleteComment(comment.id, $index)">
-                        <md-icon>delete</md-icon>
-                    </md-button>
+    <div ng-cloak>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Open Comments ({{openComments.length}})" ng-click="whichComments.complete=false">
+                    <md-content class="md-padding">
+                        <div ng-hide="openComments.length">
+                            <md-card style="width:90vw">
+                                <md-card-content>No open comments</md-card-content>
+
+                            </md-card>
+
+                        </div>
+                        <div ng-repeat="comment in comments | filter: {complete: false} as openComments track by comment.id" class="removable">
+                            <md-card id="{{comment.id}}" style="width: 90vw">
+                                <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
+                                    alt="{{comment.id}}">
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">{{$index + 1}}</span>
+                                        <span ng-show="{{comment.complete}}">
+                                            <i>(Archived)</i>
+                                        </span>
+                                        <span class="md-subhead">
+                                            {{comment.created_at | date : 'medium'}} | {{comment.author}}
+                                        </span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-content>
+                                    <p>
+                                        <md-chips ng-model="comment.tags" readonly="true">
+                                            <md-chip-template>
+                                                {{$chip.category }} - {{$chip.subcategory}} - {{$chip.title}}
+                                            </md-chip-template>
+                                        </md-chips>
+                                    </p>
+                                    <p>
+                                        {{comment.content}}
+                                    </p>
+                                </md-card-content>
+                                <div ng-repeat="reply in comment.replies">
+                                    {{reply.author}} - {{reply.content}}
+                                </div>
+                                <md-card-actions layout='row' layout-align='end center'>
+                                    <md-button class="md-icon-button" ng-click="shownReplies[comment.id] = !shownReplies[comment.id]">
+                                        <md-icon>reply</md-icon>
+                                    </md-button>
+                                    <md-button class="md-icon-button" ng-click="updateComment(comment.id, $index)">
+                                        <md-icon>archive</md-icon>
+                                    </md-button>
+                                    <md-button ng-if="user.type === 'admin' || user === comment.author" class="md-icon-button" ng-click="deleteComment(comment.id, $index)">
+                                        <md-icon>delete</md-icon>
+                                    </md-button>
 
 
-                </md-card-actions>
-                <div ng-show="shownReplies[comment.id]">
-                    <md-input-container>
-                        <label for="reply">Add a reply</label>
-                        <textarea name="reply" ng-model="comment.reply"></textarea>
-                    </md-input-container>
-                    <md-button ng-click="addReply(comment.reply, comment.id)">Add Reply</md-button>
+                                </md-card-actions>
 
-                </div>
-            </md-card>
-        </div>
+                                <div ng-show="shownReplies[comment.id]">
+                                    <md-input-container>
+                                        <label for="reply">Add a reply</label>
+                                        <textarea name="reply" ng-model="comment.reply"></textarea>
+                                    </md-input-container>
+                                    <md-button ng-click="addReply(comment.reply, comment.id)">Add Reply</md-button>
+
+                                </div>
+                            </md-card>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Archived Comments ({{completedComments.length}})" ng-click="whichComments.complete=true">
+                    <md-content class="md-padding">
+                        <div ng-repeat="comment in comments | filter: {complete: true} as completedComments track by comment.id" class="removable">
+                            <md-card id="{{comment.id}}" style="width: 90vw">
+                                <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
+                                    alt="{{comment.id}}">
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">{{$index + 1}}</span>
+                                        <span ng-show="{{comment.complete}}">
+                                            <i>(Archived)</i>
+                                        </span>
+                                        <span class="md-subhead">
+                                            {{comment.created_at | date : 'medium'}} | {{comment.author}}
+                                        </span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-content>
+                                    <p>
+                                        <md-chips ng-model="comment.tags" readonly="true">
+                                            <md-chip-template>
+                                                {{$chip.category }} - {{$chip.subcategory}} - {{$chip.title}}
+                                            </md-chip-template>
+                                        </md-chips>
+                                    </p>
+                                    <p>
+                                        {{comment.content}}
+                                    </p>
+                                </md-card-content>
+                                <div ng-repeat="reply in comment.replies">
+                                    {{reply.author}} - {{reply.content}}
+                                </div>
+                                <md-card-actions layout='row' layout-align='end center'>
+                                    <md-button class="md-icon-button" ng-click="shownReplies[comment.id] = !shownReplies[comment.id]">
+                                        <md-icon>reply</md-icon>
+                                    </md-button>
+                                    <md-button class="md-icon-button" ng-click="updateComment(comment.id, $index)">
+                                        <md-icon>archive</md-icon>
+                                    </md-button>
+                                    <md-button ng-if="user.type === 'admin' || user === comment.author" class="md-icon-button" ng-click="deleteComment(comment.id, $index)">
+                                        <md-icon>delete</md-icon>
+                                    </md-button>
+
+
+                                </md-card-actions>
+
+                                <div ng-show="shownReplies[comment.id]">
+                                    <md-input-container>
+                                        <label for="reply">Add a reply</label>
+                                        <textarea name="reply" ng-model="comment.reply"></textarea>
+                                    </md-input-container>
+                                    <md-button ng-click="addReply(comment.reply, comment.id)">Add Reply</md-button>
+
+                                </div>
+                            </md-card>
+                        </div>
+                    </md-content>
+                </md-tab>
+
+            </md-tabs>
+        </md-content>
     </div>
+</div>
 </div>

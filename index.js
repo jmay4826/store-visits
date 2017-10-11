@@ -94,5 +94,6 @@ app.put('/api/comment/:id', isLoggedIn, controller.updateComment);
 app.delete('/api/comment/:id', isLoggedIn, controller.deleteComment);
 app.post('/api/comment/:id/replies', isLoggedIn, controller.addReply);
 app.get('/api/analytics/comments', isLoggedIn, controller.getCommentsData);
+app.get('/api/location/:id/replies', isLoggedIn, controller.getReplies);
 
 app.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));

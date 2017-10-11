@@ -5,6 +5,10 @@ require('dotenv').config();
 
 aws.config.region = 'us-east-2';
 
+const getReplies = (req, res) => {
+  const db = req.app.get('db');
+  db.getReplies(req.params.id).then(response => res.json(response));
+};
 const getUsers = (req, res) => {
   const db = req.app.get('db');
   db.getUsers().then(response => res.json(response));
@@ -166,5 +170,6 @@ module.exports = {
   getAnalytics,
   getCommentsData,
   updateComment,
-  addReply
+  addReply,
+  getReplies
 };

@@ -15,8 +15,20 @@ angular
     $scope.comments = comments;
     [$scope.location] = location;
     $scope.user = authorized;
+    $scope.whichComments = { complete: false };
 
     headerService.setTitle(`${$scope.location.name} (${$scope.location.id})`);
+    const menuItems = [
+      {
+        userType: 'all',
+        title: 'Show Archived Comments',
+        action() {
+          $scope.archiveFilter = false;
+        }
+      }
+    ];
+
+    headerService.setMenuItems(menuItems);
 
     const addComment = (comment, coordinates) => {
       const newComment = {

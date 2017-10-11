@@ -6,4 +6,17 @@ angular.module('floorplan').service('headerService', function ($http) {
   this.setTitle = (newTitle) => {
     currentTitle = newTitle;
   };
+  const menuItems = [
+    { title: 'none', action: () => console.log('none') },
+    { title: 'none', action: () => console.log('none') }
+  ];
+
+  this.getMenuItems = () => {
+    console.log(menuItems);
+    return menuItems;
+  };
+
+  this.setMenuItems = (items) => {
+    this.menuItems = items;
+  };
 });

@@ -8,7 +8,8 @@ angular
     $mdDialog,
     authorized,
     headerService,
-    $state
+    $state,
+    replyService
   ) {
     $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     $scope.comments = comments;
@@ -35,6 +36,15 @@ angular
         $scope.comments.splice(index, 1);
       });
     };
+
+    $scope.updateComment = (id, index) =>
+      commentService.updateComment(id).then((response) => {
+        $scope.comments.splice(index, 1);
+        return response;
+      });
+
+    $scope.addReply = (replyText, commentId) => replyService.addReply(replyText, commentId);
+
     $scope.showModal = function (event) {
       const imgHeight = event.srcElement.clientHeight;
       const imgWidth = event.srcElement.clientWidth;

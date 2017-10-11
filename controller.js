@@ -18,7 +18,7 @@ const getTags = (req, res) => {
 
 const getTagTemplate = (req, res) => {
   const db = req.app.get('db');
-  console.log('get tag template:', req.body);
+  console.log('get tag template:', req.params.id);
   db.getTags(req.params.id).then(response => res.json(response));
 };
 
@@ -134,6 +134,22 @@ const getAnalytics = (req, res) => {
   db.analytics.getAllData().then(response => res.json(response));
 };
 
+const updateComment = (req, res) => {
+  const db = req.app.get('db');
+  db.updateComment(req.params.id).then(response => res.json(response));
+};
+
+const addReply = (req, res) => {
+  const db = req.app.get('db');
+  db
+    .addReply({
+      content: req.body.replyText,
+      comment_id: req.params.id,
+      author: req.user.username
+    })
+    .then(response => res.json(response));
+};
+
 module.exports = {
   getLocations,
   getLocation,
@@ -148,5 +164,7 @@ module.exports = {
   getTags,
   getTagTemplate,
   getAnalytics,
-  getCommentsData
+  getCommentsData,
+  updateComment,
+  addReply
 };

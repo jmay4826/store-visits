@@ -36,15 +36,26 @@
                     </p>
                 </md-card-content>
                 <md-card-actions layout='row' layout-align='end center'>
-
-                    <md-button class="md-icon-button" ng-click="archiveComment(comment.id, $index)">
-                        <md-icon>check</md-icon>
+                    <md-button class="md-icon-button" ng-click="shownReplies[comment.id] = !shownReplies[comment.id]">
+                        <md-icon>reply</md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="updateComment(comment.id, $index)">
+                        <md-icon>archive</md-icon>
                     </md-button>
                     <md-button ng-if="user.type === 'admin' || user === comment.author" class="md-icon-button" ng-click="deleteComment(comment.id, $index)">
                         <md-icon>delete</md-icon>
                     </md-button>
 
+
                 </md-card-actions>
+                <div ng-show="shownReplies[comment.id]">
+                    <md-input-container>
+                        <label for="reply">Add a reply</label>
+                        <textarea name="reply" ng-model="comment.reply"></textarea>
+                    </md-input-container>
+                    <md-button ng-click="addReply(comment.reply, comment.id)">Add Reply</md-button>
+
+                </div>
             </md-card>
         </div>
     </div>

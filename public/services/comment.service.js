@@ -1,5 +1,6 @@
 angular.module('floorplan').service('commentService', function ($http, uploadService, tagService) {
   this.serviceTest = 'yes';
+  this.updateComment = id => $http.put(`/api/comment/${id}`);
   this.getComments = id =>
     $http.get(`/api/location/${id}/comments`).then((commentResponse) => {
       console.log(commentResponse);
@@ -9,14 +10,17 @@ angular.module('floorplan').service('commentService', function ($http, uploadSer
       });
 
       tagService.getTags(id).then((tagResponse) => {
-        tagResponse.data.forEach((tag) => {
-          const relatedComment = commentResponse.data.find(comment => comment.id === tag.comment_id);
+        if (tagResponse.data) {
+          console.log(tagResponse.data);
+          tagResponse.data.forEach((tag) => {
+            const relatedComment = commentResponse.data.find(comment => comment.id == tag.comment_id);
 
-          if (!relatedComment.tags) {
-            relatedComment.tags = [];
-          }
-          relatedComment.tags.push(tag);
-        });
+            if (!relatedComment.tags) {
+              relatedComment.tags = [];
+            }
+            relatedComment.tags.push(tag);
+          });
+        }
         return commentResponse;
       });
       return commentResponse;

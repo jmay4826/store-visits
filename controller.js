@@ -135,7 +135,7 @@ const firstrun = (req, res) => {
 
 const getAnalytics = (req, res) => {
   const db = req.app.get('db');
-  db.analytics.getAllData().then(response => res.json(response));
+  db.analytics.getAllData(['locations.id']).then(response => res.json(response));
 };
 
 const updateComment = (req, res) => {

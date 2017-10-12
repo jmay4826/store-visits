@@ -25,7 +25,8 @@ angular
     'ngAnimate',
     'ngFileUpload',
     'duScroll',
-    'ngMessages'
+    'ngMessages',
+    'chart.js'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     //* **TEMPORARY***CHANGE OTHERWISE TO /
@@ -66,21 +67,9 @@ angular
         controller: 'locationsController',
         resolve: {
           authorized,
-          locations(locationService, $state, $q) {
-            // const defer = $q.defer();
-            return locationService.getLocations().then(function (response) {
-              // defer.resolve(response.data);
-              return response.data;
-            });
-            //   .catch((err) => {
-            //     if (err.status === 401) {
-            //       $state.go('login', { error: 'You must be logged in to continue.' });
-            //       defer.reject(err);
-            //     }
-            //   });
-            // return defer.promise;
+          locations(locationService) {
+            return locationService.getLocations().then(response => response.data);
           }
-          // })
         }
       })
       .state('location', {

@@ -115,9 +115,7 @@ angular
         templateUrl: '/./analytics/analytics.template.html',
         controller: 'analyticsController',
         resolve: {
-          commentsData(analyticsService) {
-            return analyticsService.getAnalytics().then(response => response.data);
-          }
+          authorized
         }
       });
   })

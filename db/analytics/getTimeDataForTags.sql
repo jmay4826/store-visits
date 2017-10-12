@@ -1,5 +1,7 @@
 SELECT
-    locations.name AS name,
+    tags.title AS title,
+    tags.subcategory AS subcategory,
+    tags.category AS category,
     MAX(updated_at - created_at), 
     AVG(updated_at - created_at), 
     (
@@ -16,4 +18,4 @@ FROM comments
 JOIN locations on locations.id = comments.location
 LEFT JOIN tags on tags.comment_id = comments.id
 WHERE complete=true 
-GROUP BY locations.name;
+GROUP BY title, subcategory, category;

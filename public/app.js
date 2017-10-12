@@ -116,7 +116,7 @@ angular
         controller: 'analyticsController',
         resolve: {
           commentsData(analyticsService) {
-            return analyticsService.getCommentData().then(response => response.data);
+            return analyticsService.getAnalytics().then(response => response.data);
           }
         }
       });

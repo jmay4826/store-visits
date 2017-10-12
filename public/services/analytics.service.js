@@ -1,3 +1,3 @@
 angular.module('floorplan').service('analyticsService', function ($http) {
-  this.getCommentData = () => $http.get('/api/analytics/comments');
+  this.getAnalytics = () => $http.get('/api/analytics');
 });

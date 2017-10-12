@@ -1,4 +1,5 @@
 SELECT 
+    name,
     location, 
     MAX(updated_at - created_at), 
     AVG(updated_at - created_at), 

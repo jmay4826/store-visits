@@ -40,11 +40,9 @@
                             <md-card-content>
                                 <p>{{comment.content}}</p>
                             </md-card-content>
-                            <md-divider></md-divider>
-                            <div ng-repeat="reply in comment.replies">
-                                {{reply.author}} - {{reply.content}}
-                            </div>
+                            <!-- <md-divider></md-divider> -->
                             <md-card-actions layout='row' layout-align='end center'>
+                                <span ng-click="shownReplies[comment.id]=!shownReplies[comment.id]">{{comment.replies.length || 'No'}} replies</span>
                                 <md-button class="md-icon-button" ng-click="shownReplies[comment.id] = !shownReplies[comment.id]">
                                     <md-icon>reply</md-icon>
                                 </md-button>
@@ -56,12 +54,36 @@
                                 </md-button>
                             </md-card-actions>
                         </md-card>
-                        <div ng-show="shownReplies[comment.id]">
-                            <md-input-container>
-                                <label for="reply">Add a reply</label>
-                                <textarea name="reply" ng-model="comment.reply"></textarea>
-                            </md-input-container>
-                            <md-button ng-click="addReply(comment.reply, comment.id)">Add Reply</md-button>
+                        <div ng-show="shownReplies[comment.id]" flex="90" flex-offset="10">
+                            <md-card>
+                                <div ng-repeat="reply in comment.replies">
+                                    <md-card-content>
+                                        <md-card-header>
+                                            <md-card-header-text>
+                                                <span class="md-subhead">{{reply.created_at | date: 'short'}} - {{reply.author}}</span>{{reply.content}}
+                                            </md-card-header-text>
+                                        </md-card-header>
+                                    </md-card-content>
+                                    <md-divider ng-hide="$last"></md-divider>
+                                </div>
+                                <!-- <md-card-actions> -->
+                                <md-divider></md-divider>
+                                <md-card-content>
+                                    <!-- <md-card-header>
+                                        <md-card-header-text> -->
+                                    <div layout="row" flex="grow" layout-align="start center">
+                                        <md-input-container flex="grow">
+                                            <label for="reply">Add a reply</label>
+                                            <textarea name="reply" ng-model="comment.reply"></textarea>
+                                        </md-input-container>
+                                        <md-button ng-click="addReply(comment.reply, comment.id)">
+                                            <md-icon>send</md-icon>
+                                        </md-button>
+                                    </div>
+                                    <!-- </md-card-header-text>
+                                    </md-card-header> -->
+                                    <!-- </md-card-actions> -->
+                            </md-card>
                         </div>
                     </div>
                 </md-content>

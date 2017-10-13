@@ -10,7 +10,7 @@
     <link href="./styles/index.css" rel="stylesheet">
 </head>
 
-<body>
+<body ng-cloak>
     <div ng-controller="headerController">
         <md-toolbar class="md-hue-2" style="position: fixed">
             <div class="md-toolbar-tools">
@@ -60,7 +60,7 @@
             </md-content>
         </md-sidenav>
     </div>
-    <div ui-view style="padding-top: 64px; min-height: 80vh;"></div>
+    <div ui-view class="mainContent"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
@@ -74,6 +74,7 @@
 <script src="./js/moment.js"></script>
 <script src="./js/chart.js/Chart.min.js"></script>
 <script src="./js/angular-chart.js"></script>
+<script src="./js/ngGeolocation.js"></script>
 
 <script src="./app.js"></script>
 <script src="./services/header.service.js"></script>

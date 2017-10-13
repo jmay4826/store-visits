@@ -81,9 +81,13 @@ angular
         })
         .then(response => addComment(response, coordinates))
         .then((response) => {
+          commentService.getComments($scope.location.id).then((response) => {
+            console.log(response);
+            $scope.comments = response.data;
+          });
           // $scope.comments.push(response.data[0]);
           // maybe we could find a better way to do this to avoid the flash on reload?
-          $state.reload();
+          // $state.reload();
         });
 
       // This might not work in all browsers....but neither will flexbox sooooo

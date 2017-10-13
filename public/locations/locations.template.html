@@ -1,16 +1,21 @@
 <div layout="row" layout-align="center">
-    <md-card flex-gt-sm="50" flex="100" layout="row" layout-align="center center">
+    <md-card flex-gt-sm="80" flex="100" layout="row" layout-align="center center">
         <div flex="75" layout="row" layout-wrap>
             <md-input-container flex="100">
                 <input type="text" placeholder="Search" ng-model="searchFilter">
             </md-input-container>
-            <div ng-if="user.type === 'admin'" flex="100">
-                <md-button ui-sref="newLocation">
-                    <md-icon>add</md-icon> Add New Location
+            <div>
+                Locations nearby:
+                <md-button ng-show="geoFiltered.length === 0"> No locations nearby</md-button>
+                <md-button ui-sref="location({id: location.id})" ng-repeat="location in locations | filter: geolocationFilter as geoFiltered">
+                    {{location.name}} ({{location.id}})
+
                 </md-button>
             </div>
             <md-list flex="100" layout="row" layout-wrap>
-                <md-list-item class="md-2-line" ng-repeat="location in locations | filter: searchFilter | orderBy: 'name'" ui-sref="location({id: location.id})">
+                <!-- Available Locations -->
+                <md-list-item flex-gt-sm="25" flex="50" class="md-2-line" flex="auto" ng-repeat="location in locations | filter: searchFilter | orderBy: 'name'"
+                    ui-sref="location({id: location.id})">
                     <div class="md-list-item-text">
                         <h3>{{location.name}}</h3>
                         <p>({{location.id}})</p>

@@ -19,4 +19,6 @@ angular.module('floorplan').service('headerService', function ($http) {
   this.setMenuItems = (items) => {
     this.menuItems = items;
   };
+
+  this.color = 'light-blue';
 });

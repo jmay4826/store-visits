@@ -18,7 +18,7 @@ angular
     $scope.logout = function () {
       console.log('logout');
       authService.logout().then((response) => {
-        console.log(response);
+        $scope.toggleNav();
         $state.go('login');
       });
     };

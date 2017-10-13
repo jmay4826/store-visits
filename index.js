@@ -25,7 +25,7 @@ app.use(passport.session());
 app.use(flash());
 
 passport.serializeUser((user, done) => {
-  done(null, { username: user.username, type: user.type, userid: user.id });
+  done(null, { username: user.username.toLowerCase(), type: user.type, userid: user.id });
 });
 passport.deserializeUser((obj, done) => {
   done(null, obj);
@@ -35,7 +35,7 @@ app.use(bodyParser.json({ limit: '15mb' }));
 
 passport.use(new LocalStrategy(function (username, password, done) {
   const db = app.get('db');
-  db.users.findOne({ username }).then(function (user) {
+  db.users.findOne({ username: username.toLowerCase() }).then(function (user) {
     if (!user) {
       return done(null, false);
     }
@@ -67,7 +67,7 @@ app.post('/auth/register', (req, res) => {
   const db = req.app.get('db');
   bcrypt.hash(req.body.password, 10).then((hash) => {
     db
-      .addUser([req.body.username, hash])
+      .addUser([req.body.username.toLowerCase(), hash])
       .then(() => passport.authenticate('local'))
       .then(() => res.send(req.session));
   });

@@ -26,11 +26,12 @@ angular
     'ngFileUpload',
     'duScroll',
     'ngMessages',
-    'chart.js'
+    'chart.js',
+    'ngGeolocation'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     //* **TEMPORARY***CHANGE OTHERWISE TO /
-    $urlRouterProvider.otherwise('/locations');
+    $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('home', {
         url: '/',
@@ -120,5 +121,5 @@ angular
       });
   })
   .config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default').primaryPalette('pink');
+    $mdThemingProvider.theme('default').primaryPalette('blue-grey');
   });

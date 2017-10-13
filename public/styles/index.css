@@ -9,16 +9,30 @@
 img:focus {
   outline: none;
 }
+.floorplan {
+  max-height: 75vh;
+  max-width: 95vw;
+}
 
+.mainContent {
+  padding-top: 80px;
+  min-height: 80vh;
+}
 .marker {
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-color: rgba(199, 42, 42, 0.342);
+  background-color: rgb(233, 30, 99);
   z-index: 1;
   border-radius: 50%;
   transform: translate(-13px, -13px);
   text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.marker a {
+  color: white;
+  text-decoration: none;
 }
 
 .number {
@@ -31,16 +45,29 @@ img:focus {
 .ng-animate ~ .removable {
   transition: all 250ms;
 }
-.ng-leave {
+md-card.ng-leave {
   /* transform: translateX(0px); */
   opacity: 100;
   transform: translateX(0);
   /* transition: all 250ms; */
 }
-.ng-leave-active {
+md-card.ng-leave-active {
   /* transform: scaleY(0.1); */
   opacity: 0;
   transform: translateX(-100%);
+}
+
+.invisible {
+  border: 2px solid red;
+  /* visibility: hidden !important; */
+  /* display: block !important; */
+}
+
+.marker.ng-leave {
+  opacity: 100;
+}
+.marker.ng-leave-active {
+  opacity: 0;
 }
 
 .ng-leave ~ .removable {

@@ -138,10 +138,14 @@ const deleteComment = (req, res) => {
 //= ========= Analytics routes ===========
 const getAnalytics = (req, res) => {
   const db = req.app.get('db');
-  if (req.query.for === 'locations') {
-    db.analytics.getTimeDataForLocations().then(response => res.json(response));
-  } else if (req.query.for === 'tags') {
-    db.analytics.getTimeDataForTags().then(response => res.json(response));
+  if (req.query.q === 'time') {
+    if (req.query.for === 'locations') {
+      db.analytics.getTimeDataForLocations().then(response => res.json(response));
+    } else if (req.query.for === 'tags') {
+      db.analytics.getTimeDataForTags().then(response => res.json(response));
+    }
+  } else if (req.query.q === 'tags') {
+    db.analytics.getTagBreakdownByLocation().then(response => res.json(response));
   }
 };
 

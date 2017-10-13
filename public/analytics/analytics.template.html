@@ -19,7 +19,7 @@
                 </md-select>
                 <canvas ng-show="selectedDataInfo[selectedData].type === 'barchart'" id="genericBarChart" class="chart chart-horizontal-bar"
                     chart-data="barchart[selectedData].data" chart-labels="barchart[selectedData].labels" chart-options="barchart[selectedData].options"></canvas>
-                <canvas ng-show="chartTypes[selectedData] === 'piechart'" id="genericPieChart" class="chart chart-pie" chart-data="piechart[selectedData].data"
+                <canvas ng-show="selectedDataInfo[selectedData].type === 'piechart'" id="genericPieChart" class="chart chart-pie" chart-data="piechart[selectedData].data"
                     chart-labels="piechart[selectedData].labels" chart-options="piechart[selectedData].options"></canvas>
             </div>
 

@@ -79,6 +79,13 @@
                 </md-tab>
                 <md-tab label="Archived Comments ({{completedComments.length}})" ng-click="whichComments.complete=true">
                     <md-content class="md-padding">
+                        <div ng-hide="completedComments.length">
+                            <md-card style="width:90vw">
+                                <md-card-content>No open comments</md-card-content>
+
+                            </md-card>
+
+                        </div>
                         <div ng-repeat="comment in comments | filter: {complete: true} as completedComments track by comment.id" class="removable">
                             <md-card id="{{comment.id}}" style="width: 90vw">
                                 <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"

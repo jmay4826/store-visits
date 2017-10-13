@@ -16,11 +16,16 @@ angular.module('floorplan').controller('analyticsController', function ($scope, 
     tagResolutionTime: {
       type: 'barchart',
       title: 'Average Resolution Time By Tag'
+    },
+    tagBreakdownByLocation: {
+      type: 'piechart',
+      title: 'Number of Comments By Tag'
     }
   };
 
   $scope.changeChart = (id) => {
     analyticsService[`get${id}`]().then((response) => {
+      console.log(response);
       currentAnalytics = response.data;
       $scope.currentAnalytics = currentAnalytics;
       $scope[`get${id}`]();
@@ -104,6 +109,20 @@ angular.module('floorplan').controller('analyticsController', function ($scope, 
             return `${epoch_to_dd_hh_mm_ss(tooltipItem.xLabel)}`;
           }
         }
+      }
+    };
+  };
+
+  $scope.gettagBreakdownByLocation = function () {
+    $scope.piechart = { tagBreakdownByLocation: {} };
+    // $scope.piechart.tagBreakdownByLocation.analytics = currentAnalytics;
+    $scope.piechart.tagBreakdownByLocation.labels = currentAnalytics.map(row => (row.category ? `${row.category} - ${row.subcategory} - ${row.title}` : 'None'));
+    // $scope.piechart.tagBreakdownByLocation.labels = currentAnalytics.map(row => row.title);
+    $scope.piechart.tagBreakdownByLocation.data = currentAnalytics.map(row => row.count);
+    $scope.piechart.tagBreakdownByLocation.options = {
+      legend: {
+        display: true,
+        position: 'right'
       }
     };
   };

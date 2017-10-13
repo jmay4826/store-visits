@@ -16,6 +16,7 @@ angular
     [$scope.location] = location;
     $scope.user = authorized;
     $scope.whichComments = { complete: false };
+    $scope.highlighted = 1;
 
     headerService.setTitle(`${$scope.location.name} (${$scope.location.id})`);
     const menuItems = [

@@ -18,6 +18,11 @@ img:focus {
   padding-top: 80px;
   min-height: 80vh;
 }
+
+.highlighted {
+  background-color: red;
+}
+
 .marker {
   display: inline-block;
   width: 26px;

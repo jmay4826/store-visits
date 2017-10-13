@@ -18,37 +18,29 @@
                     <div ng-hide="openComments.length">
                         <md-card>
                             <md-card-content>Select an area on the floorplan to add a comment.</md-card-content>
-
                         </md-card>
-
                     </div>
-                    <div ng-repeat="comment in comments | filter: {complete: false} as openComments track by comment.id" class="removable">
+                    <div ng-repeat="comment in comments | filter: {complete: false} as openComments track by comment.id" class="removable" ng-class="{highlighted: (highlighted===comment.id)}">
                         <md-card id="{{comment.id}}">
                             <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
                                 alt="{{comment.id}}">
-                            <md-card-title>
-                                <md-card-title-text>
-                                    <span class="md-headline">{{$index + 1}}</span>
-                                    <span ng-show="{{comment.complete}}">
-                                        <i>(Archived)</i>
+                            <md-card-header>
+                                <md-card-avatar>{{$index + 1}}</md-card-avatar>
+                                <md-card-header-text>
+                                    <span class="md-title">
+                                        <span ng-repeat="tag in comment.tags" class="md-title">
+                                            <span ng-hide="$first">,</span> {{tag.category}} - {{tag.subcategory}} - {{tag.title}}
+                                        </span>
                                     </span>
                                     <span class="md-subhead">
-                                        {{comment.created_at | date : 'medium'}} | {{comment.author}}
+                                        Created at {{comment.created_at | date : 'medium'}} by {{comment.author}}
                                     </span>
-                                </md-card-title-text>
-                            </md-card-title>
+                                </md-card-header-text>
+                            </md-card-header>
                             <md-card-content>
-                                <p>
-                                    <md-chips ng-model="comment.tags" readonly="true">
-                                        <md-chip-template>
-                                            {{$chip.category }} - {{$chip.subcategory}} - {{$chip.title}}
-                                        </md-chip-template>
-                                    </md-chips>
-                                </p>
-                                <p>
-                                    {{comment.content}}
-                                </p>
+                                <p>{{comment.content}}</p>
                             </md-card-content>
+                            <md-divider></md-divider>
                             <div ng-repeat="reply in comment.replies">
                                 {{reply.author}} - {{reply.content}}
                             </div>
@@ -62,19 +54,15 @@
                                 <md-button ng-if="user.type === 'admin' || user === comment.author" class="md-icon-button" ng-click="deleteComment(comment.id, $index)">
                                     <md-icon>delete</md-icon>
                                 </md-button>
-
-
                             </md-card-actions>
-
-                            <div ng-show="shownReplies[comment.id]">
-                                <md-input-container>
-                                    <label for="reply">Add a reply</label>
-                                    <textarea name="reply" ng-model="comment.reply"></textarea>
-                                </md-input-container>
-                                <md-button ng-click="addReply(comment.reply, comment.id)">Add Reply</md-button>
-
-                            </div>
                         </md-card>
+                        <div ng-show="shownReplies[comment.id]">
+                            <md-input-container>
+                                <label for="reply">Add a reply</label>
+                                <textarea name="reply" ng-model="comment.reply"></textarea>
+                            </md-input-container>
+                            <md-button ng-click="addReply(comment.reply, comment.id)">Add Reply</md-button>
+                        </div>
                     </div>
                 </md-content>
             </md-tab>

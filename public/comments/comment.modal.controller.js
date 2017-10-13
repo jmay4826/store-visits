@@ -1,10 +1,10 @@
 /*eslint-disable*/
 angular
   .module('floorplan')
-  .controller('commentModalController', function($scope, $mdDialog, tagService) {
-    tagService.getTagTemplate().then(response => {
-      $scope.categories = response;
-    });
+  .controller('commentModalController', function($scope, $mdDialog, tagService, tagTemplate) {
+    // tagService.getTagTemplate().then(response => {
+    $scope.categories = tagTemplate;
+    // });
     $scope.addTag = function(category, subcategory, tagTitle) {
       // if ($scope.selectedTags.indexOf(tag) === -1) {
       $scope.selectedTags.push({ category, subcategory, title: tagTitle });

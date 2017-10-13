@@ -63,7 +63,8 @@ img:focus {
   margin: 0px;
 }
 
-/* .dense > .md-errors-spacer {
-  min-height: 10px;
-  height: 10px;
-} */
+/* MATERIAL OVERRIDES */
+
+md-dialog {
+  min-width: 75%;
+}

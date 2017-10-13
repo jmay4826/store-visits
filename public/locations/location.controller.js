@@ -69,10 +69,15 @@ angular
         .show({
           templateUrl: './comments/comment.modal.template.html',
           controller: 'commentModalController',
-          parent: angular.element(document.body),
+          // parent: angular.element(document.body),
           targetEvent: event,
           clickOutsideToClose: true,
-          fullscreen: true
+          fullscreen: true,
+          resolve: {
+            tagTemplate(tagService) {
+              return tagService.getTagTemplate();
+            }
+          }
         })
         .then(response => addComment(response, coordinates))
         .then((response) => {

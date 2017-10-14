@@ -44,16 +44,21 @@ angular
       return commentService.addComment(newComment);
     };
 
+    // EVENTUALLY backend logic will automatically call getComments and return it after the update db call.
     $scope.deleteComment = function (id, index) {
-      commentService.deleteComment(id).then((response) => {
-        $scope.comments.splice(index, 1);
-      });
+      commentService.deleteComment(id).then(response => refreshComments());
     };
-
+    function refreshComments() {
+      commentService.getComments($scope.location.id).then((response) => {
+        console.log(response);
+        $scope.comments = response.data;
+        return response;
+      });
+    }
     $scope.updateComment = (id, index) =>
       commentService.updateComment(id).then((response) => {
-        $scope.comments.splice(index, 1);
-        return response;
+        console.log(index);
+        return refreshComments();
       });
 
     $scope.addReply = (replyText, commentId) => replyService.addReply(replyText, commentId);

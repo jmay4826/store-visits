@@ -20,5 +20,5 @@ angular
     };
 
     headerService.setTitle('Login');
-    $scope.error = $stateParams.error;
+    // $scope.visibleError = $stateParams.error;
   });

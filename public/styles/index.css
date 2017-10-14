@@ -48,7 +48,7 @@ img:focus {
 }
 .ng-animate,
 .ng-animate ~ .removable {
-  transition: all 250ms;
+  /* transition: all 250ms; */
 }
 md-card.ng-leave {
   /* transform: translateX(0px); */

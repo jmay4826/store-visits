@@ -45,11 +45,12 @@ angular
     };
 
     // EVENTUALLY backend logic will automatically call getComments and return it after the update db call.
+    // Maybe.....
     $scope.deleteComment = function (id, index) {
       commentService.deleteComment(id).then(response => refreshComments());
     };
     function refreshComments() {
-      commentService.getComments($scope.location.id).then((response) => {
+      return commentService.getComments($scope.location.id).then((response) => {
         console.log(response);
         $scope.comments = response.data;
         return response;
@@ -61,7 +62,8 @@ angular
         return refreshComments();
       });
 
-    $scope.addReply = (replyText, commentId) => replyService.addReply(replyText, commentId);
+    $scope.addReply = (replyText, commentId) =>
+      replyService.addReply(replyText, commentId).then(response => refreshComments());
 
     $scope.showModal = function (event) {
       const imgHeight = event.srcElement.clientHeight;
@@ -75,7 +77,6 @@ angular
         .show({
           templateUrl: './comments/comment.modal.template.html',
           controller: 'commentModalController',
-          // parent: angular.element(document.body),
           targetEvent: event,
           clickOutsideToClose: true,
           fullscreen: true,
@@ -87,13 +88,7 @@ angular
         })
         .then(response => addComment(response, coordinates))
         .then((response) => {
-          commentService.getComments($scope.location.id).then((response) => {
-            console.log(response);
-            $scope.comments = response.data;
-          });
-          // $scope.comments.push(response.data[0]);
-          // maybe we could find a better way to do this to avoid the flash on reload?
-          // $state.reload();
+          commentService.getComments($scope.location.id).then(response => refreshComments());
         });
 
       // This might not work in all browsers....but neither will flexbox sooooo

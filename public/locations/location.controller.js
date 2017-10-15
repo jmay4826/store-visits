@@ -79,6 +79,7 @@ angular
           controller: 'commentModalController',
           targetEvent: event,
           clickOutsideToClose: true,
+          parent: angular.element(document.body),
           fullscreen: true,
           resolve: {
             tagTemplate(tagService) {

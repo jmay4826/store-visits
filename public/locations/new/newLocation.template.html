@@ -1,12 +1,7 @@
 <div layout="row" layout-align="center" layout-padding>
     <div flex="90">
         <md-card>
-            <!-- <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">
-                        <md-icon>add</md-icon> Add New Location</span>
-                </md-card-title-text>
-            </md-card-title> -->
+
             <form name='newLocationForm' id='newLocationForm'>
                 <md-card-content layout="column" layout-align="center center">
 
@@ -33,6 +28,16 @@
                             </md-input-container>
                             <div flex="100" layout="row" layout-align="space-between">
                                 <div flex="50">
+                                    <!-- TODO: Use google maps api instead of hard coding latitude/longitude -->
+                                    <!-- <md-autocomplete md-no-cache="true" md-selected-item="selectedItem" md-search-text-change="search(searchText)" md-search-text="searchText"
+                                        md-items="item in search(searchText)" md-item-text="item" md-min-length="0" placeholder="Type your address">
+                                        <md-item-template>
+                                            <span md-highlight-text="searchText" md-highlight-flags="^i">{{item}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No matches found for "{{searchText}}".
+                                        </md-not-found>
+                                    </md-autocomplete> -->
                                     <md-input-container>
                                         <label for="latitude">Latitude</label>
                                         <input type="number" value='100' name="latitude" ng-model="latitude">

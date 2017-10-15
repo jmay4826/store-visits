@@ -25,5 +25,10 @@ angular
     $scope.toggleMenu = function ($mdMenu, ev) {
       $mdMenu.open(ev);
     };
+
+    $scope.setTitle = function (newTitle) {
+      headerService.setTitle(newTitle);
+    };
+
     // $scope.menuItems = ['item1', 'item2', 'item4'];
   });

@@ -69,6 +69,7 @@ angular
         resolve: {
           authorized,
           locations(locationService) {
+            console.log('resolved locations');
             return locationService.getLocations().then(response => response.data);
           }
         }

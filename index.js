@@ -68,8 +68,15 @@ app.post('/auth/register', (req, res) => {
   bcrypt.hash(req.body.password, 10).then((hash) => {
     db
       .addUser([req.body.username.toLowerCase(), hash])
-      .then(() => passport.authenticate('local'))
-      .then(() => res.send(req.session));
+      .then(() => res.redirect('/auth/login'))
+      .then(() => res.send(req.session))
+      .catch((err) => {
+        if (err.code === '23505') {
+          return res.status(400).json(err);
+        }
+        console.log(err);
+        return res.status(500).json(err);
+      });
   });
 });
 

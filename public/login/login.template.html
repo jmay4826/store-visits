@@ -1,7 +1,6 @@
 <form name="loginForm" ng-submit="login()">
     <div layout="row" layout-align="center">
-
-        <md-card flex-gt-sm="75" flex="100" layout="column">
+        <md-card flex="100" flex-gt-sm="80" flex-gt-md="50" layout="column">
             <md-card-title>
                 <md-card-title-text>
                     <div>
@@ -30,12 +29,11 @@
                     </div>
                 </md-input-container>
             </div>
-            <md-card-actions layout="row" layout-align="end">
-                <md-button ui-sref="register">Register</md-button>
-                <md-button ng-click="login()">Submit</md-button>
+            <md-card-actions layout="row" layout-align="space-around">
+                <md-button ui-sref="register">Not yet a user?</md-button>
+                <!-- <md-button flex="grow"></md-button> -->
+                <md-button ng-click="login()">Login</md-button>
             </md-card-actions>
         </md-card>
     </div>
 </form>
-
-<!-- {{response}} {{error}} -->

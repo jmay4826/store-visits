@@ -6,7 +6,8 @@ angular
     users,
     locationService,
     uploadService,
-    headerService
+    headerService,
+    $stateParams
   ) {
     $scope.users = users;
     headerService.setTitle('Add new location');
@@ -32,6 +33,6 @@ angular
           });
           return response;
         })
-        .then(() => $state.go('locations'));
+        .then(() => $state.transitionTo('locations', $stateParams, { reload: true }));
     };
   });

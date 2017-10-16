@@ -1,12 +1,27 @@
 angular
   .module('floorplan')
-  .controller('registerController', function ($scope, $stateParams, $state, authService) {
+  .controller('registerController', function (
+    $scope,
+    $stateParams,
+    $state,
+    authService,
+    headerService
+  ) {
     $scope.register = function () {
-      authService
-        .register($scope.username, $scope.password)
-        .then(response => $state.go('locations'))
-        .catch(err => ($scope.response = 'Username or password not recognized'));
+      if ($scope.registerForm.$valid) {
+        authService
+          .register($scope.username, $scope.password)
+          .then(response => $state.go('locations'))
+          .catch((err) => {
+            console.log(err);
+            if (err.status === 400) {
+              $scope.response = 'Username already exists. Please try again.';
+            }
+          });
+      } else {
+        $scope.loginForm.$setDirty();
+      }
     };
 
-    $scope.error = $stateParams.error;
+    headerService.setTitle('Register');
   });

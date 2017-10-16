@@ -51,9 +51,14 @@
                         </div>
                     </md-list-item>
                     <md-divider></md-divider>
-                    <md-list-item class="md-2-line" ng-click="logout()">
+                    <md-list-item ng-show="user.username" class="md-2-line" ng-click="logout()">
                         <div class="md-list-item-text" layout="column">
                             <h3>Logout</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item ng-hide="user.username" class="md-2-line" ui-sref="login" ng-click="toggleNav()">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>Login</h3>
                         </div>
                     </md-list-item>
                 </md-list>

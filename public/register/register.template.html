@@ -1,6 +1,14 @@
 <form name="registerForm" ng-submit="register()">
     <div layout="row" layout-align="center">
-        <md-card flex-gt-sm="75" flex="100" layout="column">
+        <md-card flex="100" flex-gt-sm="80" flex-gt-md="50" layout="column">
+            <md-card-title>
+                <md-card-title-text>
+                    <div>
+                        <span style="visibility: hidden">Error</span>
+                        <span class="error-message">{{response}}</span>
+                    </div>
+                </md-card-title-text>
+            </md-card-title>
             <div layout="row" layout-wrap layout-align="center">
                 <md-input-container flex="75">
                     <label for="username">Username</label>

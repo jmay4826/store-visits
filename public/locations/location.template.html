@@ -1,7 +1,10 @@
+<div ng-show="progress" style="position: fixed; top: 10px; right: 10px; z-index: 2">
+    <md-progress-circular md-mode="determinate" md-diameter="20px" value="{{progress}}"></md-progress-circular>
+</div>
 <div layout="row" layout-align="center center" ng-cloak>
     <div id="markerHolder">
         <img md-whiteframe="8" class="floorplan" ng-src="{{S3PATH + location.floorplan}}" ng-click="showModal($event)" alt="">
-        <div class="marker jm-fade-out jm-fade-in" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: whichComments.complete} as openComments track by comment.id"
+        <div class="marker jm-fade" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: whichComments.complete} track by comment.id"
             style="position: absolute; left: {{comment.x}}%; top: {{comment.y}}%">
             <span class="number">
                 <a ng-click="highlighted=comment.id" href='#{{comment.id}}' du-smooth-scroll>{{$index + 1}}</a>
@@ -22,10 +25,16 @@
                             </md-card>
                         </div>
                         <div ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: false} as openComments track by comment.id"
-                            class="jm-slide-up jm-sweep-right" ng-class="{highlighted: (highlighted===comment.id)}">
+                            ng-class="{highlighted: (highlighted===comment.id)}">
                             <md-card id="{{comment.id}}">
-                                <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
+                                <!-- <md-card-title>
+                                    <md-card-title-media>
+                                        <div class="md-media-lg card-media"> -->
+                                <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-image-no-fill"
                                     alt="{{comment.id}}">
+                                <!-- </div>
+                                    </md-card-title-media>
+                                </md-card-title> -->
                                 <md-card-header>
                                     <md-card-avatar>{{$index + 1}}</md-card-avatar>
                                     <md-card-header-text>
@@ -63,7 +72,7 @@
                             </div>
                             <div class="jm-slide-up" ng-show="shownReplies[comment.id]" flex="90" flex-offset="10">
                                 <md-card>
-                                    <div ng-repeat="reply in comment.replies">
+                                    <div ng-repeat="reply in comment.replies | orderBy: 'created_at'">
                                         <md-card-content>
                                             <md-card-header>
                                                 <md-card-header-text>

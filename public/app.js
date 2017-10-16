@@ -122,5 +122,8 @@ angular
       });
   })
   .config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default').primaryPalette('blue-grey');
+    $mdThemingProvider.theme('default').primaryPalette('blue-grey', {
+      default: '400',
+      'hue-1': '50'
+    });
   });

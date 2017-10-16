@@ -51,6 +51,16 @@ img:focus {
   color: rgb(221, 44, 0);
 }
 
+.accordion {
+  padding: 0;
+}
+.subcategory {
+  padding-left: 25px;
+}
+.taglist {
+  padding-left: 25px;
+}
+
 /* NG-ANIMATIONS */
 /* ************* */
 /* SLIDE UP (SIBLINGS)*/
@@ -70,27 +80,64 @@ img:focus {
 }
 
 /* ************* */
-/* SLIDE UP */
-/* element being hidden by sliding up */
-/* DOESN'T WORK */
+/* SLIDE UP AND DOWN */
+/* element being hidden by sliding up and shown by sliding down */
+
 .jm-slide-up {
-  /* z-index: 1; */
-}
-.ng-hide.jm-slide-up {
-  transition: all 5s;
+  transition: all 250ms ease-in-out;
 }
 
+/* .ng-hide.jm-slide-up {
+  transition: all 1s;
+} */
+
 .ng-hide-add.jm-slide-up {
-  transform: translateY(0);
+  max-height: 500px;
+  overflow: hidden;
   /* opacity: 100; */
 }
 
 .ng-hide-add-active.jm-slide-up {
-  /* we can use percentage here
-  because we are animating the 
-  element itself, not a sibling */
+  max-height: 0;
+}
+
+.ng-hide-remove.jm-slide-up {
+  max-height: 0;
+  overflow: hidden;
+  /* opacity: 100; */
+}
+.ng-hide-remove-active.jm-slide-up {
+  max-height: 500px;
+}
+
+/* ************* */
+/* SLIDE DOWN */
+/* element being shown by sliding down */
+/* DOESN'T WORK */
+.ng-hide.jm-slide-down {
+  /* .ng-hide.jm-slide-down { */
+  /* transition: all 1s; */
+}
+
+.ng-hide-remove {
+  /* transition: all 1s;
+  max-height: 0; */
+}
+
+.ng-hide-remove-active {
+  /* opacity: 100; */
+  /* max-height: 2em; */
+}
+
+.ng-hide-remove.jm-slide-down {
+  /* min-height: 0; */
+  /* overflow: hidden; */
   /* opacity: 0; */
-  transform: translateY(-100%);
+}
+
+.ng-hide-remove-active.jm-slide-down {
+  /* min-height: 2em; */
+  /* opacity: 100; */
 }
 
 /* ************* */
@@ -113,29 +160,29 @@ img:focus {
 /* FADE IN */
 /* animated object being added by fading in */
 
-.ng-animate.jm-fade-in {
+.ng-animate.jm-fade {
   transition: all 250ms;
 }
-.ng-enter.jm-fade-in {
+.ng-enter.jm-fade {
   opacity: 0;
 }
-.ng-enter-active.jm-fade-in {
+.ng-enter-active.jm-fade {
   opacity: 100;
+}
+
+.ng-animate.jm-fade {
+  transition: all 250ms;
+}
+.ng-leave.jm-fade {
+  opacity: 100;
+}
+.ng-leave-active.jm-fade {
+  opacity: 0;
 }
 
 /* ************* */
 /* FADE OUT */
 /* animated object being removed by fading out */
-
-.ng-animate.jm-fade-out {
-  transition: all 250ms;
-}
-.ng-leave.jm-fade-out {
-  opacity: 100;
-}
-.ng-leave-active.jm-fade-out {
-  opacity: 0;
-}
 
 /* ************* */
 

@@ -9,7 +9,8 @@ angular
     authorized,
     headerService,
     $state,
-    replyService
+    replyService,
+    $mdToast
   ) {
     $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     $scope.comments = comments;
@@ -87,9 +88,24 @@ angular
             }
           }
         })
-        .then(response => addComment(response, coordinates))
         .then((response) => {
-          commentService.getComments($scope.location.id).then(response => refreshComments());
+          $scope.progress = 20;
+          return addComment(response, coordinates);
+        })
+        .then((response) => {
+          $scope.progress = 50;
+          return commentService.getComments($scope.location.id).then((response) => {
+            $scope.progress = 80;
+            return refreshComments();
+          });
+        })
+        .then((response) => {
+          $scope.progress = 100;
+          return response;
+        })
+        .then((response) => {
+          $scope.progress = 0;
+          $mdToast.show($mdToast.simple().textContent('Comment Added.'));
         });
 
       // This might not work in all browsers....but neither will flexbox sooooo

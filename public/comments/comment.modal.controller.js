@@ -10,6 +10,10 @@ angular
       $scope.selectedTags.push({ category, subcategory, title: tagTitle });
       // }
     };
+    // $scope.shown = {
+    //   Facilities: true,
+    //   Interior: true
+    // };
 
     $scope.selectedTags = [];
     $scope.cancel = function() {

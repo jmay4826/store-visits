@@ -51,49 +51,137 @@ img:focus {
   color: rgb(221, 44, 0);
 }
 
-.ng-animate ~ .removable {
+/* NG-ANIMATIONS */
+/* ************* */
+/* SLIDE UP (SIBLINGS)*/
+/* siblings of an animated object being removed */
+.ng-leave ~ .jm-slide-up {
+  transition: all 500ms;
+}
+
+.ng-leave ~ .jm-slide-up {
+  transform: translateY(0);
+}
+
+.ng-leave-active ~ .jm-slide-up {
+  /* would be nice to have this slide up 
+  exactly the right about instead of this preset value */
+  transform: translateY(-150px);
+}
+
+/* ************* */
+/* SLIDE UP */
+/* element being hidden by sliding up */
+/* DOESN'T WORK */
+.jm-slide-up {
+  /* z-index: 1; */
+}
+.ng-hide.jm-slide-up {
+  transition: all 5s;
+}
+
+.ng-hide-add.jm-slide-up {
+  transform: translateY(0);
+  /* opacity: 100; */
+}
+
+.ng-hide-add-active.jm-slide-up {
+  /* we can use percentage here
+  because we are animating the 
+  element itself, not a sibling */
+  /* opacity: 0; */
+  transform: translateY(-100%);
+}
+
+/* ************* */
+/* SWEEP RIGHT */
+/* animated object being removed by sweeping right */
+
+.ng-animate.jm-sweep-right {
+  transition: all 500ms;
+}
+.ng-leave.jm-sweep-right {
+  transform: translateX(0);
+  opacity: 100;
+}
+.ng-leave-active.jm-sweep-right {
+  transform: translateX(400px);
+  opacity: 0;
+}
+
+/* ************* */
+/* FADE IN */
+/* animated object being added by fading in */
+
+.ng-animate.jm-fade-in {
   transition: all 250ms;
 }
+.ng-enter.jm-fade-in {
+  opacity: 0;
+}
+.ng-enter-active.jm-fade-in {
+  opacity: 100;
+}
+
+/* ************* */
+/* FADE OUT */
+/* animated object being removed by fading out */
+
+.ng-animate.jm-fade-out {
+  transition: all 250ms;
+}
+.ng-leave.jm-fade-out {
+  opacity: 100;
+}
+.ng-leave-active.jm-fade-out {
+  opacity: 0;
+}
+
+/* ************* */
+
+/* animated object being removed by sweeping right */
+
+/* 
 md-card.ng-leave {
-  /* transform: translateX(0px); */
+  transform: translateX(0px);
   opacity: 100;
   transform: translateX(0);
-  /* transition: all 250ms; */
-}
-md-card.ng-leave-active {
-  /* transform: scaleY(0.1); */
+  transition: all 250ms;
+} */
+/* md-card.ng-leave-active {
+  transform: scaleY(0.1);
   opacity: 0;
   transform: translateX(-100%);
-}
+} */
 
 .invisible {
   border: 2px solid red;
   /* visibility: hidden !important; */
   /* display: block !important; */
 }
-
+/* 
 .marker.ng-leave {
   opacity: 100;
-}
-.marker.ng-leave-active {
+} */
+/* .marker.ng-leave-active {
   opacity: 0;
-}
+} */
 
-.ng-leave ~ .removable {
+/* .ng-leave ~ .removable {
   transform: translateY(0);
-}
-.ng-leave-active ~ .removable {
-  /* this goes up 100% of the CURRENT element height, not the deleted element  */
+} */
+/* .ng-leave-active ~ .removable {
+  this goes up 100% of the CURRENT element height, not the deleted element 
   transform: translateY(-100%);
-}
+} */
 
-.ng-enter {
+/* .ng-enter {
   opacity: 0;
-  /* transition: all 250ms; */
-}
-.ng-enter-active {
+  transition: all 250ms;
+} */
+/* .ng-enter-active {
   opacity: 100;
-}
+} */
 
 .dense {
   margin: 0px;

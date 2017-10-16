@@ -43,7 +43,7 @@ angular
       });
 
     this.addComment = (newComment) => {
-      newComment.imagePath = newComment.image ? newComment.image.type.substr(-3) : null;
+      newComment.imagePath = newComment.image ? newComment.image.type.split('/')[1] : null;
       return $http
         .post(`/api/location/${newComment.location}/comments/new`, { newComment })
         .then((response) => {

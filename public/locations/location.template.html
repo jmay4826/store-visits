@@ -24,7 +24,7 @@
                                 <md-card-content>Select an area on the floorplan to add a comment.</md-card-content>
                             </md-card>
                         </div>
-                        <div ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: false} as openComments track by comment.id"
+                        <div class="jm-sweep-right" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: false} as openComments track by comment.id"
                             ng-class="{highlighted: (highlighted===comment.id)}">
                             <md-card id="{{comment.id}}">
                                 <!-- <md-card-title>
@@ -67,9 +67,6 @@
                                     </md-button>
                                 </md-card-actions>
                             </md-card>
-                            <div class="sibling">
-
-                            </div>
                             <div class="jm-slide-up" ng-show="shownReplies[comment.id]" flex="90" flex-offset="10">
                                 <md-card>
                                     <div ng-repeat="reply in comment.replies | orderBy: 'created_at'">
@@ -108,7 +105,7 @@
                             </md-card>
                         </div>
                         <div ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: true} as completedComments track by comment.id"
-                            class="removable" ng-class="{highlighted: (highlighted===comment.id)}">
+                            class="jm-sweep-right" ng-class="{highlighted: (highlighted===comment.id)}">
                             <md-card id="{{comment.id}}">
                                 <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
                                     alt="{{comment.id}}">

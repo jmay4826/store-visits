@@ -15,8 +15,8 @@
                     <div layout="column" layout-align="space between center">
                         <!-- maybe one day allow multiple images? -->
                         <img ngf-src="image || '../../images/thumbnail.svg'" ngf-no-object-url="true" style="max-height: 200px; max-width: 200px">
-                        <md-button ngf-select ngf-change="sign($file)" ng-model="image" name="image" ngf-pattern="'image/*'" ngf-accept="'image/*'"
-                            ngf-max-size="10MB" ngf-min-height="100">Add an Image</md-button>
+                        <md-button ngf-fix-orientation="true" ngf-select ngf-change="sign($file)" ng-model="image" name="image" ngf-pattern="'image/*'"
+                            ngf-accept="'image/*'" ngf-max-size="10MB" ngf-min-height="100">Add an Image</md-button>
                     </div>
                     <md-input-container>
                         <label for="content">Enter Comment</label>

@@ -10,7 +10,9 @@ angular
     headerService,
     $state,
     replyService,
-    $mdToast
+    $mdToast,
+    $timeout,
+    $document
   ) {
     $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     $scope.comments = comments;
@@ -113,5 +115,12 @@ angular
       // console.log(event.srcElement.clientHeight);
       // $scope.comments.push(newComment);
       // console.log(event);
+    };
+    $scope.highlight = function (id) {
+      $scope.highlighted = id;
+      // $document.scrollToElement(`${id}`);
+      $timeout(function () {
+        $scope.highlighted = 0;
+      }, 3000);
     };
   });

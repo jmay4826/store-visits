@@ -7,7 +7,9 @@
         <div class="marker jm-fade" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: whichComments.complete} track by comment.id"
             style="position: absolute; left: {{comment.x}}%; top: {{comment.y}}%">
             <span class="number">
-                <a ng-click="highlighted=comment.id" href='#{{comment.id}}' du-smooth-scroll>{{$index + 1}}</a>
+                <a href='#{{comment.id}}' du-smooth-scroll>
+                    {{$index + 1}}
+                </a>
             </span>
         </div>
     </div>
@@ -24,8 +26,7 @@
                                 <md-card-content>Select an area on the floorplan to add a comment.</md-card-content>
                             </md-card>
                         </div>
-                        <div class="jm-sweep-right" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: false} as openComments track by comment.id"
-                            ng-class="{highlighted: (highlighted===comment.id)}">
+                        <div class="jm-sweep-right jm-slide-up" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: false} as openComments track by comment.id">
                             <md-card id="{{comment.id}}">
                                 <!-- <md-card-title>
                                     <md-card-title-media>
@@ -67,7 +68,7 @@
                                     </md-button>
                                 </md-card-actions>
                             </md-card>
-                            <div class="jm-slide-up" ng-show="shownReplies[comment.id]" flex="90" flex-offset="10">
+                            <div class="jm-slide-up-down" ng-show="shownReplies[comment.id]" flex="90" flex-offset="10">
                                 <md-card>
                                     <div ng-repeat="reply in comment.replies | orderBy: 'created_at'">
                                         <md-card-content>
@@ -104,9 +105,9 @@
                                 <md-card-content>No completed comments in the past 30 days.</md-card-content>
                             </md-card>
                         </div>
-                        <div ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: true} as completedComments track by comment.id"
-                            class="jm-sweep-right" ng-class="{highlighted: (highlighted===comment.id)}">
-                            <md-card id="{{comment.id}}">
+                        <div id="{{comment.id}}" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: true} as completedComments track by comment.id"
+                            class="comment jm-sweep-right">
+                            <md-card>
                                 <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location}}/{{comment.id}}.{{comment.image}}" class="md-card-image"
                                     alt="{{comment.id}}">
                                 <md-card-header>

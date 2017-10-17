@@ -19,10 +19,6 @@ img:focus {
   min-height: 80vh;
 }
 
-.highlighted {
-  background-color: red;
-}
-
 .marker {
   display: inline-block;
   width: 26px;
@@ -65,6 +61,11 @@ img:focus {
 /* ************* */
 /* SLIDE UP (SIBLINGS)*/
 /* siblings of an animated object being removed */
+
+md-card {
+  transition: all 500ms;
+}
+
 .ng-leave ~ .jm-slide-up {
   transition: all 500ms;
 }
@@ -83,7 +84,7 @@ img:focus {
 /* SLIDE UP AND DOWN */
 /* element being hidden by sliding up and shown by sliding down */
 
-.jm-slide-up {
+.jm-slide-up-down {
   transition: all 250ms ease-in-out;
 }
 
@@ -91,22 +92,22 @@ img:focus {
   transition: all 1s;
 } */
 
-.ng-hide-add.jm-slide-up {
+.ng-hide-add.jm-slide-up-down {
   max-height: 500px;
   overflow: hidden;
   /* opacity: 100; */
 }
 
-.ng-hide-add-active.jm-slide-up {
+.ng-hide-add-active.jm-slide-up-down {
   max-height: 0;
 }
 
-.ng-hide-remove.jm-slide-up {
+.ng-hide-remove.jm-slide-up-down {
   max-height: 0;
   overflow: hidden;
   /* opacity: 100; */
 }
-.ng-hide-remove-active.jm-slide-up {
+.ng-hide-remove-active.jm-slide-up-down {
   max-height: 500px;
 }
 

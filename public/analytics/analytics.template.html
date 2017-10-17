@@ -3,18 +3,16 @@
         <md-card-content>
             <md-input-container>
                 <label for="filter">Filter Results</label>
-                <input type="text" name="filter" ng-model="name" ng-keyup="filterChart(selectedData)">
+                <input type="text" name="filter" ng-model="name" ng-keyup="filterChart(selectedChart)">
             </md-input-container>
             <div ng-repeat="data in currentAnalytics | filter: name as filteredArray">
             </div>
             <div class="chart-container">
-                <canvas ng-show="selectedDataInfo[selectedData].type === 'barchart'" id="genericBarChart" class="chart chart-horizontal-bar"
-                    chart-data="barchart[selectedData].data" chart-labels="barchart[selectedData].labels" chart-options="barchart[selectedData].options"></canvas>
-                <canvas ng-show="selectedDataInfo[selectedData].type === 'piechart'" id="genericPieChart" class="chart chart-pie" chart-data="piechart[selectedData].data"
-                    chart-labels="piechart[selectedData].labels" chart-options="piechart[selectedData].options"></canvas>
-                <md-select ng-model="selectedData" ng-change="changeChart(selectedData)">
-                    <md-option ng-repeat="(key, value) in selectedDataInfo" ng-value="key">
-                        {{value.title}}
+                <canvas id="genericChart" class="chart-base" chart-type="chart.type" chart-data="chart.data" chart-labels="chart.labels"
+                    chart-options="chart.options"></canvas>
+                <md-select ng-model="selectedChart" ng-change="changeChart(selectedChart)">
+                    <md-option ng-repeat="(key, value) in charts" ng-value="key">
+                        {{value}}
                     </md-option>
                 </md-select>
             </div>

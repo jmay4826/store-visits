@@ -2,6 +2,12 @@ angular
   .module('floorplan')
   .controller('analyticsController', function ($scope, analyticsService, headerService) {
     let currentAnalytics = {};
+    const defaultOptions = {
+      title: {
+        display: true,
+        text: 'Hover for labels. Click to view details.'
+      }
+    };
     analyticsService.getlocationResolutionTime().then((response) => {
       currentAnalytics = response.data;
       $scope.currentAnalytics = currentAnalytics;
@@ -9,22 +15,15 @@ angular
     });
 
     headerService.setTitle('Analytics');
+    $scope.chart = {};
 
-    $scope.selectedData = 'locationResolutionTime';
-    // $scope.selectedData = 'tagResolutionTime';
-    $scope.selectedDataInfo = {
-      locationResolutionTime: {
-        type: 'barchart',
-        title: 'Average Resolution Time By Location'
-      },
-      tagResolutionTime: {
-        type: 'barchart',
-        title: 'Average Resolution Time By Tag'
-      },
-      tagBreakdownByLocation: {
-        type: 'piechart',
-        title: 'Number of Comments By Tag'
-      }
+    $scope.selectedChart = 'locationResolutionTime';
+    $scope.chart.options = defaultOptions;
+
+    $scope.charts = {
+      locationResolutionTime: 'Average Resolution Time By Location',
+      tagResolutionTime: 'Average Resolution Time By Tag',
+      tagBreakdownByLocation: 'Number of Comments By Tag'
     };
 
     $scope.changeChart = (id) => {
@@ -42,36 +41,35 @@ angular
     };
 
     $scope.getlocationResolutionTime = function () {
-      $scope.barchart = { locationResolutionTime: {} };
-      $scope.barchart.locationResolutionTime.analytics = currentAnalytics;
-      $scope.barchart.locationResolutionTime.labels = currentAnalytics.map(row => row.name);
-      $scope.barchart.locationResolutionTime.data = currentAnalytics.map(row =>
-        moment.duration(row.avg));
-      $scope.barchart.locationResolutionTime.labels.push('Overall');
-      $scope.barchart.locationResolutionTime.data.push(moment.duration(currentAnalytics[0].all_avg));
-      $scope.barchart.locationResolutionTime.options = {
+      $scope.chart.type = 'horizontalBar';
+      $scope.chart.labels = currentAnalytics.map(row => row.name);
+      $scope.chart.data = currentAnalytics.map(row => moment.duration(row.avg));
+
+      if (currentAnalytics.length > 0) {
+        $scope.chart.data.push(moment.duration(currentAnalytics[0].all_avg));
+        $scope.chart.labels.push('Overall');
+      }
+
+      $scope.chart.options = {
         scales: {
           xAxes: [
             {
-              // type: 'time',
               scaleLabel: {
                 display: true,
                 labelString: 'Average Resolution Time'
               },
               ticks: {
                 callback(v) {
-                  return epoch_to_dd_hh_mm_ss(v);
+                  return humanize(v);
                 }
-                // stepSize: 30 * 60 * 60
               }
-              // stepSize: 100000000
             }
           ]
         },
         tooltips: {
           callbacks: {
             label(tooltipItem, data) {
-              return `${epoch_to_dd_hh_mm_ss(tooltipItem.xLabel)}`;
+              return `${humanize(tooltipItem.xLabel)}`;
             }
           }
         }
@@ -79,39 +77,36 @@ angular
     };
 
     $scope.gettagResolutionTime = function () {
-      $scope.barchart = { tagResolutionTime: {} };
-      $scope.barchart.tagResolutionTime.analytics = currentAnalytics;
-      $scope.barchart.tagResolutionTime.labels = currentAnalytics.map((row) => {
+      $scope.chart.type = 'horizontalBar';
+      $scope.chart.labels = currentAnalytics.map((row) => {
         row.title = row.title ? row.title : 'None';
         return row.category ? `${row.category} - ${row.subcategory} - ${row.title}` : 'None';
       });
-      $scope.barchart.tagResolutionTime.data = currentAnalytics.map(row =>
-        moment.duration(row.avg));
-      $scope.barchart.tagResolutionTime.labels.push('Overall');
-      $scope.barchart.tagResolutionTime.data.push(moment.duration(currentAnalytics[0].all_avg));
-      $scope.barchart.tagResolutionTime.options = {
+      $scope.chart.data = currentAnalytics.map(row => moment.duration(row.avg));
+      if (currentAnalytics.length > 0) {
+        $scope.chart.data.push(moment.duration(currentAnalytics[0].all_avg));
+        $scope.chart.labels.push('Overall');
+      }
+      $scope.chart.options = {
         scales: {
           xAxes: [
             {
-              stacked: true,
               scaleLabel: {
                 display: true,
                 labelString: 'Average Resolution Time'
               },
               ticks: {
                 callback(v) {
-                  return epoch_to_dd_hh_mm_ss(v);
+                  return humanize(v);
                 }
-                // stepSize: 30 * 60 * 60
               }
-              // stepSize: 100000000
             }
           ]
         },
         tooltips: {
           callbacks: {
             label(tooltipItem, data) {
-              return `${epoch_to_dd_hh_mm_ss(tooltipItem.xLabel)}`;
+              return `${humanize(tooltipItem.xLabel)}`;
             }
           }
         }
@@ -119,25 +114,15 @@ angular
     };
 
     $scope.gettagBreakdownByLocation = function () {
-      $scope.piechart = { tagBreakdownByLocation: {} };
-      // $scope.piechart.tagBreakdownByLocation.analytics = currentAnalytics;
-      $scope.piechart.tagBreakdownByLocation.labels = currentAnalytics.map(row => (row.category ? `${row.category} - ${row.subcategory} - ${row.title}` : 'None'));
-      // $scope.piechart.tagBreakdownByLocation.labels = currentAnalytics.map(row => row.title);
-      $scope.piechart.tagBreakdownByLocation.data = currentAnalytics.map(row => row.count);
-      $scope.piechart.tagBreakdownByLocation.options = {
-        title: {
-          display: true,
-          text: 'Hover to view tags. Click to view details.'
-        },
-        legend: {
-          display: false,
-          position: 'right'
-        }
-      };
+      $scope.chart.type = 'pie';
+      $scope.chart.labels = currentAnalytics.map(row => (row.category ? `${row.category} - ${row.subcategory} - ${row.title}` : 'None'));
+      $scope.chart.data = currentAnalytics.map(row => row.count);
+      $scope.chart.options = {};
+      $scope.chart.options = defaultOptions;
     };
   });
 
-function epoch_to_dd_hh_mm_ss(epoch) {
+function humanize(epoch) {
   const date = new Date(epoch);
   let dateString = '';
   if (epoch > 1000 * 60 * 60 * 24) {

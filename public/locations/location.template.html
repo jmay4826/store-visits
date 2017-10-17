@@ -7,7 +7,7 @@
         <div class="marker jm-fade" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: whichComments.complete} track by comment.id"
             style="position: absolute; left: {{comment.x}}%; top: {{comment.y}}%">
             <span class="number">
-                <a href='#{{comment.id}}' du-smooth-scroll>
+                <a href='#{{comment.id}}' du-smooth-scroll offset="60">
                     {{$index + 1}}
                 </a>
             </span>

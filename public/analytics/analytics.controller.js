@@ -125,8 +125,12 @@ angular
       // $scope.piechart.tagBreakdownByLocation.labels = currentAnalytics.map(row => row.title);
       $scope.piechart.tagBreakdownByLocation.data = currentAnalytics.map(row => row.count);
       $scope.piechart.tagBreakdownByLocation.options = {
-        legend: {
+        title: {
           display: true,
+          text: 'Hover to view tags. Click to view details.'
+        },
+        legend: {
+          display: false,
           position: 'right'
         }
       };

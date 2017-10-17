@@ -154,6 +154,12 @@ const getCommentsData = (req, res) => {
   db.analytics.getCommentCount().then(response => res.json(response));
 };
 
+const getTimeDetailForLocation = (req, res) => {
+  const db = req.app.get('db');
+  console.log(req.params);
+  db.analytics.getTimeDetailForLocation(req.params).then(response => res.json(response));
+};
+
 //= ======S3========//
 const signS3 = (req, res) => {
   const { S3_BUCKET } = process.env;
@@ -201,5 +207,6 @@ module.exports = {
   getCommentsData,
   updateComment,
   addReply,
-  getReplies
+  getReplies,
+  getTimeDetailForLocation
 };

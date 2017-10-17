@@ -18,7 +18,12 @@ angular
     $scope.chart = {};
 
     $scope.selectedChart = 'locationResolutionTime';
-    $scope.chart.options = defaultOptions;
+    $scope.chart.options = {
+      title: {
+        display: true,
+        text: 'Hover for labels. Click for details.'
+      }
+    };
 
     $scope.charts = {
       locationResolutionTime: 'Average Resolution Time By Location',
@@ -43,6 +48,7 @@ angular
     $scope.getlocationResolutionTime = function () {
       $scope.chart.type = 'horizontalBar';
       $scope.chart.labels = currentAnalytics.map(row => row.name);
+      console.log(currentAnalytics);
       $scope.chart.data = currentAnalytics.map(row => moment.duration(row.avg));
 
       if (currentAnalytics.length > 0) {
@@ -51,6 +57,9 @@ angular
       }
 
       $scope.chart.options = {
+        onClick(e, a) {
+          $scope.gettimeDetailForLocation(currentAnalytics[a[0]._index].location_id);
+        },
         scales: {
           xAxes: [
             {
@@ -75,6 +84,7 @@ angular
         }
       };
     };
+    $scope.chart.options.onClick = (e, a) => console.log(e, a);
 
     $scope.gettagResolutionTime = function () {
       $scope.chart.type = 'horizontalBar';
@@ -119,6 +129,14 @@ angular
       $scope.chart.data = currentAnalytics.map(row => row.count);
       $scope.chart.options = {};
       $scope.chart.options = defaultOptions;
+    };
+
+    $scope.gettimeDetailForLocation = (locationid) => {
+      console.log(locationid);
+      analyticsService.gettimeDetailForLocation(locationid).then((response) => {
+        console.log(response);
+        $scope.resultsDetail = response.data;
+      });
     };
   });
 

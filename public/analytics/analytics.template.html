@@ -19,3 +19,16 @@
         </md-card-content>
     </md-card>
 </div>
+<md-content>
+    <md-list>
+        <md-subheader class="md-no-sticky">Completed comments (past 30 days)</md-subheader>
+        <md-list-item class="md-3-line" ng-repeat="comment in resultsDetail">
+            <div class="md-list-item-text">
+                <h3>{{comment.resolution_time.hours}} hour</h3>
+                <h4>Completed by: {{comment.completed_by}}</h4>
+                <p>{{comment.content}}</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-content>
+<!-- {{resultsDetail}} -->

@@ -1,5 +1,5 @@
-<div layout="row" layout-align="center">
-    <md-card style="width: 80%">
+<div layout="row" layout-align="center" layout-wrap>
+    <md-card style="min-width: 80%">
         <md-card-content>
             <md-input-container>
                 <label for="filter">Filter Results</label>
@@ -8,27 +8,41 @@
             <div ng-repeat="data in currentAnalytics | filter: name as filteredArray">
             </div>
             <div class="chart-container">
-                <canvas id="genericChart" class="chart-base" chart-type="chart.type" chart-data="chart.data" chart-labels="chart.labels"
-                    chart-options="chart.options"></canvas>
                 <md-select ng-model="selectedChart" ng-change="changeChart(selectedChart)">
                     <md-option ng-repeat="(key, value) in charts" ng-value="key">
                         {{value}}
                     </md-option>
                 </md-select>
+                <canvas id="genericChart" class="chart-base" chart-type="chart.type" chart-data="chart.data" chart-labels="chart.labels"
+                    chart-options="chart.options"></canvas>
             </div>
         </md-card-content>
     </md-card>
+    <md-card style="min-width: 80%" ng-show="resultsDetail">
+        <md-card-content>
+            <md-list>
+                <md-list-item class="md-3-line" ng-repeat="comment in resultsDetail">
+                    <img ng-if="comment.image" ng-src="{{S3PATH}}{{comment.location_id}}/{{comment.comment_id}}.{{comment.image}}" class="md-avatar"
+                        alt="{{comment.id}}">
+                    <div class="md-list-item-text">
+                        <h3>
+                            {{comment.content}}
+                        </h3>
+                        <h4>
+                            {{comment.complete ? 'Completed by ' + comment.completed_by + ' in' : 'Incomplete'}}
+                            <span ng-repeat="(timeframe, value) in comment.resolution_time" ng-hide="timeframe === 'milliseconds'">
+                                {{value}} {{ value === 1 ? timeframe.substr(0, timeframe.length-1) : timeframe}}
+                            </span>
+                            at
+                            <span style="cursor: hand; text-decoration: underline" ui-sref="location({id: comment.location_id})">{{comment.location_name}}</span>
+                        </h4>
+                        <p>
+                            Last updated on {{comment.updated_at | date: 'short'}}
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
 </div>
-<md-content>
-    <md-list>
-        <md-subheader class="md-no-sticky">Completed comments (past 30 days)</md-subheader>
-        <md-list-item class="md-3-line" ng-repeat="comment in resultsDetail">
-            <div class="md-list-item-text">
-                <h3>{{comment.resolution_time.hours}} hour</h3>
-                <h4>Completed by: {{comment.completed_by}}</h4>
-                <p>{{comment.content}}</p>
-            </div>
-        </md-list-item>
-    </md-list>
-</md-content>
 <!-- {{resultsDetail}} -->

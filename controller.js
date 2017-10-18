@@ -160,6 +160,11 @@ const getTimeDetailForLocation = (req, res) => {
   db.analytics.getTimeDetailForLocation(req.params).then(response => res.json(response));
 };
 
+const getCommentsByTag = (req, res) => {
+  const db = req.app.get('db');
+  db.analytics.getCommentsByTag(req.query).then(response => res.json(response));
+};
+
 //= ======S3========//
 const signS3 = (req, res) => {
   const { S3_BUCKET } = process.env;
@@ -208,5 +213,6 @@ module.exports = {
   updateComment,
   addReply,
   getReplies,
-  getTimeDetailForLocation
+  getTimeDetailForLocation,
+  getCommentsByTag
 };

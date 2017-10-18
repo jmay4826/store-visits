@@ -1,6 +1,7 @@
 angular
   .module('floorplan')
   .controller('analyticsController', function ($scope, analyticsService, headerService) {
+    $scope.S3PATH = 'https://s3.us-east-2.amazonaws.com/floorplans-uploads/';
     let currentAnalytics = {};
     const defaultOptions = {
       title: {
@@ -25,6 +26,8 @@ angular
       }
     };
 
+    // /have the click function as a key in here instead
+    // of having to do the string interpolation thing?
     $scope.charts = {
       locationResolutionTime: 'Average Resolution Time By Location',
       tagResolutionTime: 'Average Resolution Time By Tag',
@@ -34,6 +37,7 @@ angular
     $scope.changeChart = (id) => {
       analyticsService[`get${id}`]().then((response) => {
         console.log(response);
+        $scope.resultsDetail = [];
         currentAnalytics = response.data;
         $scope.currentAnalytics = currentAnalytics;
         $scope[`get${id}`]();
@@ -58,7 +62,10 @@ angular
 
       $scope.chart.options = {
         onClick(e, a) {
-          $scope.gettimeDetailForLocation(currentAnalytics[a[0]._index].location_id);
+          // can I make this generic? Pass in the whole object instead of the id?
+          if (a[0]) {
+            $scope.gettimeDetailForLocation(currentAnalytics[a[0]._index].location_id);
+          }
         },
         scales: {
           xAxes: [
@@ -129,11 +136,24 @@ angular
       $scope.chart.data = currentAnalytics.map(row => row.count);
       $scope.chart.options = {};
       $scope.chart.options = defaultOptions;
+      $scope.chart.options.onClick = function (e, a) {
+        if (a[0]) {
+          $scope.getcommentsByTag(currentAnalytics[a[0]._index]);
+        }
+      };
     };
 
     $scope.gettimeDetailForLocation = (locationid) => {
       console.log(locationid);
       analyticsService.gettimeDetailForLocation(locationid).then((response) => {
+        console.log(response);
+        $scope.resultsDetail = response.data;
+      });
+    };
+
+    $scope.getcommentsByTag = (clickedObject) => {
+      console.log(clickedObject);
+      analyticsService.getcommentsByTag(clickedObject).then((response) => {
         console.log(response);
         $scope.resultsDetail = response.data;
       });

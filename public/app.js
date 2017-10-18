@@ -27,7 +27,8 @@ angular
     'duScroll',
     'ngMessages',
     'chart.js',
-    'ngGeolocation'
+    'ngGeolocation',
+    'angularMoment'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     //* **TEMPORARY***CHANGE OTHERWISE TO /

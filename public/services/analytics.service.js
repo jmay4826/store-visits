@@ -4,4 +4,6 @@ angular.module('floorplan').service('analyticsService', function ($http) {
   this.gettagResolutionTime = () => $http.get('api/analytics?q=time&for=tags');
   this.gettagBreakdownByLocation = () => $http.get('api/analytics?q=tags');
   this.gettimeDetailForLocation = locationid => $http.get(`api/analytics/${locationid}/time`);
+  this.getcommentsByTag = dataObject =>
+    $http.get(`api/analytics/tags?category=${dataObject.category}&subcategory=${dataObject.subcategory}&title=${dataObject.title}`);
 });

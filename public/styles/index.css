@@ -10,8 +10,8 @@ img:focus {
   outline: none;
 }
 .floorplan {
-  max-height: 75vh;
-  max-width: 95vw;
+  /* max-height: 75vh; */
+  /* max-width: 95vw; */
 }
 
 .mainContent {

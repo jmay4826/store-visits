@@ -21,6 +21,10 @@ angular
     $scope.whichComments = { complete: false };
     $scope.highlighted = 1;
 
+    $scope.location.floorplanStyle =
+      $scope.location.height >= $scope.location.width ? { height: '75vh' } : { width: '95vw' };
+    console.log($scope.location);
+
     headerService.setTitle(`${$scope.location.name} (${$scope.location.id})`);
     const menuItems = [
       {

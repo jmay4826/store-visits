@@ -115,7 +115,7 @@ angular
       })
       .state('analytics', {
         url: '/analytics',
-        templateUrl: '/./analytics/analytics.template.html',
+        templateUrl: './analytics/analytics.template.html',
         controller: 'analyticsController',
         resolve: {
           authorized

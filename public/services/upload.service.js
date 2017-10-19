@@ -15,18 +15,16 @@ angular.module('floorplan').service('uploadService', function ($http, Upload, $s
   this.upload = (file) => {
     console.log(file);
 
-    return $http
-      .get($sce.trustAsResourceUrl(`/sign-s3?file-name=${file.ngfName}&file-type=${file.type}`))
-      .then((response) => {
-        console.log(response);
-        return $http({
-          method: 'PUT',
-          url: $sce.trustAsResourceUrl(response.data.signedRequest),
-          headers: {
-            'Content-Type': file.type
-          },
-          data: file
-        });
+    return $http.get(`/sign-s3?file-name=${file.ngfName}&file-type=${file.type}`).then((response) => {
+      console.log(response);
+      return $http({
+        method: 'PUT',
+        url: $sce.trustAsResourceUrl(response.data.signedRequest),
+        headers: {
+          'Content-Type': file.type
+        },
+        data: file
       });
+    });
   };
 });

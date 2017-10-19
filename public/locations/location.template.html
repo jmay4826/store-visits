@@ -18,7 +18,7 @@
 <div ng-cloak>
     <md-content>
         <md-tabs md-center-tabs md-dynamic-height md-border-bottom>
-            <md-tab label="Open Comments ({{openComments.length}})" ng-click="whichComments.complete=false">
+            <md-tab label="Open ({{openComments.length}})" ng-click="whichComments.complete=false">
                 <md-content class="md-padding" layout="row" layout-align="center">
                     <div flex="100" flex-gt-sm="80" flex-gt-md="50">
                         <div ng-hide="openComments.length">
@@ -97,7 +97,7 @@
                     </div>
                 </md-content>
             </md-tab>
-            <md-tab label="Archived Comments ({{completedComments.length}})" ng-click="whichComments.complete=true">
+            <md-tab label="Archived ({{completedComments.length}})" ng-click="whichComments.complete=true">
                 <md-content class="md-padding" layout="row" layout-align="center">
                     <div flex="100" flex-gt-sm="80" flex-gt-md="50">
                         <div ng-hide="completedComments.length">

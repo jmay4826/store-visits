@@ -1,4 +1,4 @@
-angular.module('floorplan').service('uploadService', function ($http, Upload) {
+angular.module('floorplan').service('uploadService', function ($http, Upload, $sce) {
   this.uploadCommentImage = (commentObject, id) => {
     // rename the file to whatever it needs to be.
     console.log(commentObject);
@@ -15,7 +15,8 @@ angular.module('floorplan').service('uploadService', function ($http, Upload) {
   this.upload = (file) => {
     console.log(file);
 
-    return $http.get(`/sign-s3?file-name=${file.ngfName}&file-type=${file.type}`).then(response =>
+
+    return $http.get($sce.trustAsResourceUrl(`/sign-s3?file-name=${file.ngfName}&file-type=${file.type}`)).then(response =>
       $http({
         method: 'PUT',
         url: response.data.signedRequest,

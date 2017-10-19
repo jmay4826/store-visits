@@ -28,7 +28,8 @@ angular
     'ngMessages',
     'chart.js',
     'ngGeolocation',
-    'angularMoment'
+    'angularMoment',
+    'angular-loading-bar'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     //* **TEMPORARY***CHANGE OTHERWISE TO /

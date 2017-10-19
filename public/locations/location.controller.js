@@ -21,13 +21,13 @@ angular
     $scope.whichComments = { complete: false };
     $scope.highlighted = 1;
 
-    if ($scope.location.height >= $scope.location.width) {
-      $scope.floorplanStyle = { height: '75vh' };
-    } else {
-      $scope.floorplanStyle = { width: '95vw' };
-    }
-    // $scope.floorplanStyle =
-    //   $scope.location.height >= $scope.location.width ? { height: '75vh' } : { width: '95vw' };
+    // if ($scope.location.height >= $scope.location.width) {
+    //   $scope.floorplanStyle = { height: '75vh' };
+    // } else {
+    //   $scope.floorplanStyle = { width: '95vw' };
+    // }
+    $scope.floorplanStyle =
+      $scope.location.height >= $scope.location.width ? { height: '75vh' } : { width: '95vw' };
     // console.log($scope.location);
 
     headerService.setTitle(`${$scope.location.name} (${$scope.location.id})`);

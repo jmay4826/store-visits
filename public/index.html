@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="./styles/index.css" rel="stylesheet">
+    <link href="./styles/loading-bar.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.js"></script>
 </head>
 
@@ -21,6 +22,8 @@
                 <h2 flex md-truncate>{{title()}}</h2>
             </div>
         </md-toolbar>
+        <div id="loading-bar-container">
+        </div>
         <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-component-id="nav">
             <md-toolbar class="md-theme-light">
                 <h1 class="md-toolbar-tools">Menu</h1>
@@ -81,6 +84,7 @@
 <script src="./js/chart.js/Chart.min.js"></script>
 <script src="./js/angular-chart.js"></script>
 <script src="./js/ngGeolocation.js"></script>
+<script src="./js/loading-bar.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRQuTZPmU4s-vV2KHTVTeqqYO3SpXSdHU&libraries=places"></script>
 <script src="./js/angular-moment.js"></script>
 

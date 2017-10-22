@@ -28,28 +28,29 @@
                             <em>{{tag.title}}</em>
                         </span>
                     </div>
-                    <div ng-repeat="(category, subcategories) in categories track by $index" ng-init="categoryIndex = $index" class="category md-hue-1"
-                        ng-class="{'md-hue-2': shown[category]}">
-                        <span ng-click="shown[category]=!shown[category]">
-                            <md-button>{{category}}
-                                <md-icon>{{shown[category] ? 'expand_less': 'expand_more'}}</md-icon>
-                            </md-button>
-
-                        </span>
-                        <div ng-show="shown[category]" class="jm-slide-up">
-                            <md-subheader ng-repeat="(subcategory, tags) in subcategories track by $index" ng-init="subcategoryIndex = $index" class="subcategory"
-                                ng-class="{'md-hue-1': shown[subcategory]}">
-                                <span ng-click="shown[subcategory]=!shown[subcategory]">
-                                    <md-button>{{subcategory}}
-                                        <md-icon>{{shown[subcategory] ? 'expand_less': 'expand_more'}}</md-icon>
-                                    </md-button>
+                    <div class="simple-card">
+                        <div ng-repeat="(category, subcategories) in categories track by $index" ng-init="categoryIndex = $index" class="jm-slide-up-down">
+                            <div class="category" ng-class="{shownCategory: shown[category]}" ng-click="shown[category]=!shown[category]">
+                                <span>{{category}}
+                                    <md-icon>{{shown[category] ? 'expand_less': 'expand_more'}}</md-icon>
                                 </span>
-                                <div class="jm-slide-up taglist" ng-show="shown[subcategory]">
-                                    <md-button ng-repeat="tag in tags | orderBy: 'title' " ng-click="addTag(category, subcategory, tag.title)">{{tag.title}}</md-button>
+
+                            </div>
+                            <div ng-show="shown[category]" class="jm-slide-up-down">
+                                <div ng-class="{shownCategory: shown[subcategory]}" ng-repeat="(subcategory, tags) in subcategories track by $index" ng-init="subcategoryIndex = $index"
+                                    class="subcategory">
+                                    <div ng-click="shown[subcategory]=!shown[subcategory]">
+                                        <span>{{subcategory}}
+                                            <md-icon>{{shown[subcategory] ? 'expand_less': 'expand_more'}}</md-icon>
+                                        </span>
+                                    </div>
+                                    <div class="jm-slide-up-down taglist" ng-show="shown[subcategory]">
+                                        <span ng-repeat="tag in tags | orderBy: 'title' " ng-click="addTag(category, subcategory, tag.title)">{{tag.title}}</span>
+                                    </div>
                                 </div>
-                            </md-subheader>
+                            </div>
+                            <!-- <md-divider></md-divider> -->
                         </div>
-                        <!-- <md-divider></md-divider> -->
                     </div>
                     <!-- <div>
                         <md-chips ng-model="selectedTags">

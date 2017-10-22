@@ -14,7 +14,7 @@
 
 <body ng-cloak>
     <div ng-controller="headerController">
-        <md-toolbar class="md-hue-2" style="position: fixed">
+        <md-toolbar class="md-hue-2" style="position: fixed" ng-hide="title() === 'Welcome'">
             <div class="md-toolbar-tools">
                 <md-button ng-click="toggleNav()" class="md-icon-button" aria-label="Settings">
                     <md-icon>menu</md-icon>

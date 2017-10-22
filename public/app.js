@@ -51,7 +51,10 @@ angular
       .state('register', {
         url: '/register',
         templateUrl: './register/register.template.html',
-        controller: 'registerController'
+        controller: 'registerController',
+        params: {
+          error: null
+        }
       })
       .state('newLocation', {
         url: '/locations/new',
@@ -124,8 +127,7 @@ angular
       });
   })
   .config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default').primaryPalette('blue-grey', {
-      default: '400',
-      'hue-1': '50'
+    $mdThemingProvider.theme('default').primaryPalette('teal', {
+      default: '400'
     });
   });

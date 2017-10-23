@@ -121,6 +121,9 @@
                                         <span class="md-subhead">
                                             Created at {{comment.created_at | date : 'medium'}} by {{comment.author}}
                                         </span>
+                                        <span ng-show="comment.updated_at" class="md-subhead">
+                                            Marked complete at {{comment.updated_at | date : 'medium'}} by {{comment.completed_by}}
+                                        </span>
                                     </md-card-header-text>
                                 </md-card-header>
                                 <md-card-content>

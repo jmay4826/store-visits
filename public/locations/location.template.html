@@ -135,7 +135,7 @@
                             </md-card>
                             <div class="jm-slide-up-down" flex="90" flex-offset="10" ng-show="shownReplies[comment.id]">
                                 <md-card>
-                                    <div ng-repeat="reply in comment.replies">
+                                    <div ng-repeat="reply in comment.replies | orderBy: 'created_at'">
                                         <md-card-content>
                                             <md-card-header>
                                                 <md-card-header-text>

@@ -1,8 +1,8 @@
 <div layout="row" layout-align="center center" ng-cloak>
     <div id="markerHolder">
 
-        <img md-whiteframe="8" ng-style="floorplanStyle" class="floorplan" ng-src="{{S3PATH + location.floorplan}}" ng-click="showModal($event)"
-            alt="">
+        <img md-whiteframe="8" style="max-width: 95vw; max-height: 75vh;" class="floorplan" ng-src="{{S3PATH + location.floorplan}}"
+            ng-click="showModal($event)" alt="">
 
         <div class="marker jm-fade" ng-repeat="comment in comments | orderBy: '-updated_at' | filter: {complete: whichComments.complete} track by comment.id"
             style="position: absolute; left: {{comment.x}}%; top: {{comment.y}}%">

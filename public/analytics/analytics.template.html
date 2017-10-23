@@ -5,7 +5,7 @@
             <div ng-repeat="data in currentAnalytics | filter: name as filteredArray">
             </div>
             <div class="chart-container">
-                <md-select ng-model="selectedChart" ng-change="changeChart(selectedChart)">
+                <md-select aria-label="Choose a different chart" ng-model="selectedChart" ng-change="changeChart(selectedChart)">
                     <md-option ng-repeat="(key, value) in charts" ng-value="key">
                         {{value}}
                     </md-option>

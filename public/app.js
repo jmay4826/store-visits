@@ -1,7 +1,7 @@
 function authorized(authService, $q, $state) {
   const defer = $q.defer();
   authService.getCurrentUser().then((response) => {
-    console.log(response);
+    // console.log(response);
     if (!response) {
       $state.go('login', { error: 'You must be logged in to continue' });
       defer.reject('not logged in');
@@ -74,7 +74,7 @@ angular
         resolve: {
           authorized,
           locations(locationService) {
-            console.log('resolved locations');
+            // console.log('resolved locations');
             return locationService.getLocations().then(response => response.data);
           }
         }
@@ -111,7 +111,7 @@ angular
                 }
                 categories[tag.category][tag.subcategory].push({ title: tag.title });
               });
-              console.log(categories);
+              // console.log(categories);
               return categories;
             });
           }

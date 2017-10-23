@@ -36,7 +36,7 @@ angular
 
     $scope.changeChart = (id) => {
       analyticsService[`get${id}`]().then((response) => {
-        console.log(response);
+        // console.log(response);
         $scope.resultsDetail = [];
         currentAnalytics = response.data;
         $scope.currentAnalytics = currentAnalytics;
@@ -52,7 +52,7 @@ angular
     $scope.getlocationResolutionTime = function () {
       $scope.chart.type = 'horizontalBar';
       $scope.chart.labels = currentAnalytics.map(row => row.name);
-      console.log(currentAnalytics);
+      // console.log(currentAnalytics);
       $scope.chart.data = currentAnalytics.map(row => moment.duration(row.avg));
 
       if (currentAnalytics.length > 0) {
@@ -144,17 +144,17 @@ angular
     };
 
     $scope.gettimeDetailForLocation = (locationid) => {
-      console.log(locationid);
+      // console.log(locationid);
       analyticsService.gettimeDetailForLocation(locationid).then((response) => {
-        console.log(response);
+        // console.log(response);
         $scope.resultsDetail = response.data;
       });
     };
 
     $scope.getcommentsByTag = (clickedObject) => {
-      console.log(clickedObject);
+      // console.log(clickedObject);
       analyticsService.getcommentsByTag(clickedObject).then((response) => {
-        console.log(response);
+        // console.log(response);
         $scope.resultsDetail = response.data;
       });
     };

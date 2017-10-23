@@ -5,7 +5,7 @@ angular
       this.subcategory = subcategory;
     }
 
-    console.log(existingTags);
+    //console.log(existingTags);
     $scope.hidden = {};
     $scope.categories = existingTags || { 'New Category': { 'New Subcategory': ['New Tag'] } };
 
@@ -21,7 +21,7 @@ angular
 
     $scope.saveTags = function () {
       tagService.addTagTemplate($scope.categories).then((response) => {
-        console.log(response);
+        //console.log(response);
       });
     };
   });

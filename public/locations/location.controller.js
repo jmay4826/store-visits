@@ -28,7 +28,7 @@ angular
     // }
     $scope.floorplanStyle =
       $scope.location.height >= $scope.location.width ? { height: '75vh' } : { width: '95vw' };
-    // console.log($scope.location);
+    // //console.log($scope.location);
 
     headerService.setTitle(`${$scope.location.name} (${$scope.location.id})`);
     const menuItems = [
@@ -63,14 +63,14 @@ angular
     };
     function refreshComments() {
       return commentService.getComments($scope.location.id).then((response) => {
-        console.log(response);
+        //console.log(response);
         $scope.comments = response.data;
         return response;
       });
     }
     $scope.updateComment = (id, index) =>
       commentService.updateComment(id).then((response) => {
-        console.log(index);
+        //console.log(index);
         return refreshComments();
       });
 
@@ -121,9 +121,9 @@ angular
 
       // This might not work in all browsers....but neither will flexbox sooooo
       // Confirmed it acts funny on iOS if you scroll past the initial view
-      // console.log(event.srcElement.clientHeight);
+      // //console.log(event.srcElement.clientHeight);
       // $scope.comments.push(newComment);
-      // console.log(event);
+      // //console.log(event);
     };
     $scope.highlight = function (id) {
       $scope.highlighted = id;

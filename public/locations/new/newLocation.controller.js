@@ -17,8 +17,8 @@ angular
         .upload(uploadService.rename($scope.floorplan, $scope.id))
         .then((response) => {
           floorplanUrl = response.config.data.ngfName;
-          console.log('floorplanurl', floorplanUrl);
-          console.log('res ', response);
+          //console.log('floorplanurl', floorplanUrl);
+          //console.log('res ', response);
         })
         .then((response) => {
           locationService.addLocation({

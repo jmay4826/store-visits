@@ -16,14 +16,14 @@ angular.module('floorplan').service('tagService', function ($http) {
         }
         categories[tag.category][tag.subcategory].push({ title: tag.title });
       });
-      console.log(categories);
+      //console.log(categories);
       return categories;
     });
 
   this.addTagTemplate = (categories) => {
     let tagSql = [];
     Object.keys(categories).forEach((category) => {
-      console.log(category);
+      //console.log(category);
       Object.keys(categories[category]).forEach((subcategory) => {
         const sql = categories[category][subcategory].map(tag => ({
           title: tag.title,
@@ -35,7 +35,7 @@ angular.module('floorplan').service('tagService', function ($http) {
     });
 
     tagSql = tagSql.reduce((acc, cur) => [...acc, ...cur]);
-    console.log(tagSql);
+    //console.log(tagSql);
     return $http.post('/api/tags', { tags: tagSql, comment: TEMPLATE_COMMENT_ID });
   };
 });

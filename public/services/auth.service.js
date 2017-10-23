@@ -21,7 +21,7 @@ angular.module('floorplan').service('authService', function ($http, $q) {
 
           that.currentUser.type = response.data.type;
           that.currentUser.username = response.data.username;
-          console.log('that', that.currentUser);
+          //console.log('that', that.currentUser);
 
           defer.resolve(currentUser);
         })

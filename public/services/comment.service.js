@@ -27,7 +27,7 @@ angular
 
         replyService.getReplies(id).then((replyResponse) => {
           if (replyResponse.data) {
-            console.log(replyResponse.data);
+            // console.log(replyResponse.data);
             replyResponse.data.forEach((reply) => {
               const relatedComment = commentResponse.data.find(comment => comment.id == reply.comment_id);
 
@@ -50,10 +50,8 @@ angular
           const newCommentId = response.data[0].id;
           // if there are tags
           if (newComment.tags.length > 0) {
-            console.log(newComment.tags);
-            tagService
-              .addTagsByCommentId(newComment.tags, newCommentId)
-              .then(response => console.log('tag response', response));
+            // console.log(newComment.tags);
+            tagService.addTagsByCommentId(newComment.tags, newCommentId);
           }
           // if there's an image
           if (newComment.image) {

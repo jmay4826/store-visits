@@ -16,7 +16,7 @@ angular
       $mdSidenav('nav').toggle();
     };
     $scope.logout = function () {
-      console.log('logout');
+      // console.log('logout');
       authService.logout().then((response) => {
         $scope.toggleNav();
         $state.go('login');

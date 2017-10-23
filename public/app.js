@@ -33,10 +33,10 @@ angular
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     //* **TEMPORARY***CHANGE OTHERWISE TO /
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login');
     $stateProvider
       .state('home', {
-        url: '/',
+        url: '/home',
         templateUrl: './home/home.template.html',
         controller: 'homeController'
       })

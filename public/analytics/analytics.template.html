@@ -1,10 +1,7 @@
 <div layout="row" layout-align="center" layout-wrap>
     <md-card style="min-width: 80%">
         <md-card-content>
-            <md-input-container>
-                <label for="filter">Filter Results</label>
-                <input type="text" name="filter" ng-model="name" ng-keyup="filterChart(selectedChart)">
-            </md-input-container>
+
             <div ng-repeat="data in currentAnalytics | filter: name as filteredArray">
             </div>
             <div class="chart-container">
@@ -15,10 +12,14 @@
                 </md-select>
                 <canvas id="genericChart" class="chart-base" chart-type="chart.type" chart-data="chart.data" chart-labels="chart.labels"
                     chart-options="chart.options"></canvas>
+                <md-input-container style="width: 100%">
+                    <label for="filter">Filter Results</label>
+                    <input type="text" name="filter" ng-model="name" ng-keyup="filterChart(selectedChart)">
+                </md-input-container>
             </div>
         </md-card-content>
     </md-card>
-    <md-card style="min-width: 80%" ng-show="resultsDetail">
+    <md-card class="jm-fade" style="min-width: 80%" ng-show="resultsDetail.length">
         <md-card-content>
             <md-list>
                 <md-list-item class="md-3-line" ng-repeat="comment in resultsDetail">

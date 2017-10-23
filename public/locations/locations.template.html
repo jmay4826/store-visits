@@ -14,7 +14,7 @@
             </div>
             <md-list flex="100" layout="row" layout-wrap>
                 <!-- Available Locations -->
-                <md-list-item flex-gt-sm="20" flex="100" class="md-2-line" ng-repeat="location in locations | filter: searchFilter | orderBy: 'name'"
+                <md-list-item flex-gt-sm="auto" flex="auto" class="md-2-line" ng-repeat="location in locations | filter: searchFilter | orderBy: 'name'"
                     ui-sref="location({id: location.id})">
                     <div class="md-list-item-text" layout="column" layout-align="center center">
                         <h3>{{location.name}}</h3>

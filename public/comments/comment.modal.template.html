@@ -23,10 +23,11 @@
                         <textarea name="content" ng-model="content"></textarea>
                     </md-input-container>
                     <div>
-                        Selected Tags:
-                        <span ng-repeat="tag in selectedTags">
-                            <em>{{tag.title}}</em>
-                        </span>
+                        <p>Choose tags:</p>
+
+                        <div ng-repeat="tag in selectedTags" class="chip">
+                            <span>{{tag.title}}</span>
+                        </div>
                     </div>
                     <div class="simple-card">
                         <div ng-repeat="(category, subcategories) in categories track by $index" ng-init="categoryIndex = $index" class="jm-slide-up-down">
@@ -39,13 +40,13 @@
                             <div ng-show="shown[category]" class="jm-slide-up-down">
                                 <div ng-class="{shownCategory: shown[subcategory]}" ng-repeat="(subcategory, tags) in subcategories track by $index" ng-init="subcategoryIndex = $index"
                                     class="subcategory">
-                                    <div ng-click="shown[subcategory]=!shown[subcategory]">
+                                    <div class="subcategory" ng-click="shown[subcategory]=!shown[subcategory]">
                                         <span>{{subcategory}}
                                             <md-icon>{{shown[subcategory] ? 'expand_less': 'expand_more'}}</md-icon>
                                         </span>
                                     </div>
-                                    <div class="jm-slide-up-down taglist" ng-show="shown[subcategory]">
-                                        <span ng-repeat="tag in tags | orderBy: 'title' " ng-click="addTag(category, subcategory, tag.title)">{{tag.title}}</span>
+                                    <div class="jm-slide-up-down taglist" ng-show="shown[subcategory]" layout="row" layout-wrap layout-align="start">
+                                        <md-button flex="auto" ng-repeat="tag in tags | orderBy: 'title' " ng-click="addTag(category, subcategory, tag.title)">{{tag.title}}</md-button>
                                     </div>
                                 </div>
                             </div>

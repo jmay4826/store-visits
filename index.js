@@ -105,4 +105,5 @@ app.get('/api/analytics/tags', isLoggedIn, controller.getCommentsByTag);
 app.get('/api/analytics/:locationid/time', isLoggedIn, controller.getTimeDetailForLocation);
 app.get('/api/location/:id/replies', isLoggedIn, controller.getReplies);
 
-app.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));
+app.listen(process.env.PORT, process.env.IP || '127.0.0.1', () =>
+  console.log(`Listening on ${process.env.PORT}`));

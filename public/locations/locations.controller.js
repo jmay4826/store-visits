@@ -7,10 +7,12 @@ angular
     authService,
     headerService,
     authorized,
-    $geolocation
+    $geolocation,
+    $mdSidenav
   ) {
+    $mdSidenav('nav').toggle();
     $geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 5000 }).then((position) => {
-      //console.log(position);
+      // console.log(position);
       $scope.geolocation = {
         latitude: position.coords.latitude.toFixed(2),
         longitude: position.coords.longitude.toFixed(2)

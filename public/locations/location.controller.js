@@ -26,6 +26,10 @@ angular
     // } else {
     //   $scope.floorplanStyle = { width: '95vw' };
     // }
+    $mdToast
+      .showSimple('Click on a marker to view details')
+      .then(() => $mdToast.showSimple('Click anywhere on the floorplan to add a new comment.'));
+
     $scope.floorplanStyle =
       $scope.location.height >= $scope.location.width ? { height: '75vh' } : { width: '95vw' };
     // //console.log($scope.location);
@@ -63,16 +67,15 @@ angular
     };
     function refreshComments() {
       return commentService.getComments($scope.location.id).then((response) => {
-        //console.log(response);
+        // console.log(response);
         $scope.comments = response.data;
         return response;
       });
     }
     $scope.updateComment = (id, index) =>
-      commentService.updateComment(id).then((response) => {
-        //console.log(index);
-        return refreshComments();
-      });
+      commentService.updateComment(id).then(response =>
+        // console.log(index);
+        refreshComments());
 
     $scope.addReply = (replyText, commentId) =>
       replyService.addReply(replyText, commentId).then(response => refreshComments());

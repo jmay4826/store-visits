@@ -8,9 +8,11 @@ angular
     headerService,
     authorized,
     $geolocation,
-    $mdSidenav
+    $mdSidenav,
+    $timeout
   ) {
     $mdSidenav('nav').toggle();
+    $timeout(() => $mdSidenav('nav').toggle(), 3000);
     $geolocation.getCurrentPosition({ enableHighAccuracy: true, timeout: 5000 }).then((position) => {
       // console.log(position);
       $scope.geolocation = {

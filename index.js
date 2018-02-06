@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
+const compression = require('compression');
 
 require('dotenv').config();
 
@@ -23,6 +24,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(compression());
 
 passport.serializeUser((user, done) => {
   done(null, { username: user.username.toLowerCase(), type: user.type, userid: user.id });

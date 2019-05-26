@@ -12,4 +12,4 @@ Key Features
 * Served over HTTP2 with HTTPS using Nginx on Digital Ocean.
 
 ## Screenshots
-![Walkthrough](http://jonathanrmay.com/img/portfolio/store.gif "Facilities and Merchandising Manager")
+![Walkthrough](https://github.com/jmay4826/store-visits/blob/master/store.gif?raw=true "Facilities and Merchandising Manager")

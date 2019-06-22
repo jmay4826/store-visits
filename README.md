@@ -2,7 +2,7 @@
 Full-stack, personally developed management system for retail store facility and merchandising compliance reviews.
 Built using AngularJS, NodeJS, Express and PostgreSQL.
 
-Demo: https://projects.jonathanrmay.com
+Demo: http://manager.jonathanrmay.com
 
 Key Features
 ---
